@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type = "text/javascript" scr = "js/functions.js"></script>
         <style>
             body {
                 background-color: #36393f;
@@ -33,7 +32,11 @@
     <body>
         <h1>Hello World</h1>
         <p>I'm hosted with GitHub Pages.</p>
-        <button onclick = "welcome()">I'm a button!</button>
-        <input type = "button" onclick = "welcome()" value = "Display">  
+        <button onClick="welcome()">I'm a button!</button>
+        <script>
+            function welcome() {
+                alert('Welcome to my site!')
+            }
+        </script>
     </body>
 </html>
