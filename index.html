@@ -6,37 +6,116 @@
                 background-color: #36393f;
                 color: #ffffff;
                 font-family: Verdana, Helvetica, Arial, sans-serif;
+                text-align: center;
             }
             h1 {
                 background-color: #36393f;
                 color: #ffffff;
                 font-family: Verdana, Helvetica, Arial, sans-serif;
+                text-align: center;
+            }
+            .version {
+                background-color: #36393f;
+                color: #ffffff;
+                font-family: Verdana, Helvetica, Arial, sans-serif;
+                font-size: 20px;
+                text-align: center;
             }
             p {
                 background-color: #36393f;
                 color: #ffffff;
                 font-family: Verdana, Helvetica, Arial, sans-serif;
+                text-align: center;
             }
             button {
                 background-color: #36393f;
                 color: #ffffff;
                 font-family: Verdana, Helvetica, Arial, sans-serif;
-                border: none;
+                border: solid 3px #b9bbbe;
+                border-radius: 10px;
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
-                            }
+            }
+            /* input {
+                background-color: #36393f;
+                color: #ffffff;
+                font-family: Verdana, Helvetica, Arial, sans-serif;
+                text-align: center;
+                margin: 0 auto;
+            } */
+            .grid-container {
+                display: grid;
+                grid-template-columns: 200px 200px 200px 200px ;
+                grid-template-rows: auto auto 50px 50px 50px 50px 50px 50px 50px;
+                grid-gap: 10px;
+                background-color: #36393f;
+                padding: 10px;
+                box-align: center;
+                margin: 0 auto;
+                width: 820px;
+            }
+            .grid-number {
+                border: none;
+            }
+            .image-upload {
+                grid-column: 1 / span 2;
+                margin-left: 150px;
+            }
+            .image-upload-label {
+                grid-column: 3 / span 2;
+                margin-right: 150px;
+            }
+            .backplate-checkbox {
+                margin-left: 190px;
+            }
+            .backplate-checkbox-label {
+                grid-column: 2 / span 3;
+                margin-right: 100px;
+            }
         </style>
         <title>adriaanfriesen.github.io</title>
     </head>
     <body>
-        <h1>Hello World</h1>
-        <p>I'm hosted with GitHub Pages.</p>
-        <button onClick="welcome()">I'm a button!</button>
-        <script>
-            function welcome() {
-                alert('Welcome to my site!')
-            }
-        </script>
+        <h1>Pixel Art Converter</h1>
+        <p class="version">v0.0</p>
+        <!-- <canvas id="canvas"></canvas> -->
     </body>
+    <body>
+        <div class="grid-container">
+            <input class="image-upload" type="file" id="image-upload">
+            <label class="image-upload-label" for="image-upload">Select Image</label>
+            <input class="backplate-checkbox" type="checkbox" id="backplate-checkbox">
+            <label class="backplate-checkbox-label" for="backplate-checkbox">Generate Backplate (layer of blocks behind image to improve visibility)</label>
+            <h1 class="grid-number">1</h1>
+            <h1 class="grid-number">2</h1>
+            <h1 class="grid-number">3</h1>
+            <h1 class="grid-number">4</h1>
+            <h1 class="grid-number">5</h1>
+            <h1 class="grid-number">6</h1>
+            <h1 class="grid-number">7</h1>
+            <h1 class="grid-number">8</h1>
+            <h1 class="grid-number">1</h1>
+            <h1 class="grid-number">2</h1>
+            <h1 class="grid-number">3</h1>
+            <h1 class="grid-number">4</h1>
+            <h1 class="grid-number">5</h1>
+            <h1 class="grid-number">6</h1>
+            <h1 class="grid-number">7</h1>
+            <h1 class="grid-number">8</h1>
+            <h1 class="grid-number">1</h1>
+            <h1 class="grid-number">2</h1>
+            <h1 class="grid-number">3</h1>
+            <h1 class="grid-number">4</h1>
+            <h1 class="grid-number">5</h1>
+            <h1 class="grid-number">6</h1>
+            <h1 class="grid-number">7</h1>
+            <h1 class="grid-number">8</h1>
+            <h1 class="grid-number">1</h1>
+            <h1 class="grid-number">2</h1>
+            <h1 class="grid-number">3</h1>
+            <h1 class="grid-number">4</h1>
+          </div>
+    </body>
+    <script src="js/pixel-art-converter.js"></script>
 </html>
