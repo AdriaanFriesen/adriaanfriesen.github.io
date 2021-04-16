@@ -1,3 +1,3 @@
 function welcome() {
-    console.log('Welcome to my site!');
+    alert('Welcome to my site!');
   }
