@@ -2,119 +2,78 @@
 <html>
     <head>
         <style>
-            body {
-                background-color: #36393f;
-                color: #ffffff;
-                font-family: Verdana, Helvetica, Arial, sans-serif;
-                text-align: center;
-            }
-            h1 {
-                background-color: #36393f;
-                color: #ffffff;
-                font-family: Verdana, Helvetica, Arial, sans-serif;
-                text-align: center;
-            }
-            .version {
-                background-color: #36393f;
-                color: #ffffff;
-                font-family: Verdana, Helvetica, Arial, sans-serif;
-                font-size: 20px;
-                text-align: center;
-            }
-            p {
-                background-color: #36393f;
-                color: #ffffff;
-                font-family: Verdana, Helvetica, Arial, sans-serif;
-                text-align: center;
-            }
-            button {
-                background-color: #36393f;
-                color: #ffffff;
-                font-family: Verdana, Helvetica, Arial, sans-serif;
-                border: solid 3px #b9bbbe;
-                border-radius: 10px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-            }
-            /* input {
-                background-color: #36393f;
-                color: #ffffff;
-                font-family: Verdana, Helvetica, Arial, sans-serif;
-                text-align: center;
-                margin: 0 auto;
-            } */
-            .grid-container {
-                display: grid;
-                grid-template-columns: 200px 200px 200px 200px ;
-                grid-template-rows: auto auto 50px 50px 50px 50px 50px 50px 50px;
-                grid-gap: 10px;
-                background-color: #36393f;
-                padding: 10px;
-                box-align: center;
-                margin: 0 auto;
-                width: 820px;
-            }
-            .grid-number {
-                border: none;
-            }
-            .image-upload {
-                grid-column: 1 / span 2;
-                margin-left: 150px;
-            }
-            .image-upload-label {
-                grid-column: 3 / span 2;
-                margin-right: 150px;
-            }
-            .backplate-checkbox {
-                margin: 0 auto;
-            }
-            .backplate-checkbox-label {
-                grid-column: 2 / span 3;
-                width: 572px;
+            #canvas1 {
+                background-color: white;
+                position: absolute;
+                left: 0;
+                top: 0;
             }
         </style>
-        <title>adriaanfriesen.github.io</title>
     </head>
     <body>
-        <h1>Hello World</h1>
-        <p class="version">v0.0</p>
-        <!-- <canvas id="canvas"></canvas> -->
+        <canvas id="canvas1" width="0px" height="0px"></canvas>
+        <script>
+            var c = document.getElementById("canvas1");
+            var ctx = c.getContext("2d");
+
+            window.addEventListener(
+            'resize', 
+            function() { 
+                c.width = window.innerWidth;
+                c.height = window.innerHeight;
+                render_set(); 
+            }, 
+            false);
+
+            ctx.fillStyle = "#000000";
+
+            function render_set() {
+                var height = document.getElementById("canvas1").height;
+                var width = document.getElementById("canvas1").width;
+
+                var highest_dim = Math.max(height, width);
+
+                function complex_absolute(comp) {
+                    return ( ( comp[0] ** 2 ) + ( comp[1] ** 2 ) ) ** 0.5;
+                }
+
+                function complex_squaring(comp) {
+                    return [( comp[0] ** 2 ) + ( comp[1] ** 2 * -1 ), comp[0] * comp[1] * 2];
+                }
+
+                function complex_addition(comp1, comp2) {
+                    return [comp1[0] + comp2[0], comp1[1] + comp2[1]]
+                }
+
+                function set_check(c) {
+                    let z = [0, 0];
+                    let max_i = 100;
+                    let i = max_i;
+                    while (complex_absolute(z) < 2 && i >= 0) {
+                        // console.log(z[0], z[1]);
+                        z = complex_addition(complex_squaring(z), c)
+                        // console.log(z[0], z[1]);
+                        i--;
+                    }
+                    if (complex_absolute(z) < 2) {
+                        ctx.fillRect(x, y, 1, 1);
+                    }
+                    // console.log(z[0], z[1]);
+                }
+
+                for (var y = 0; y <= height; y++) {
+                    for (var x = 0; x <= width; x++) {
+                        set_check([ ( ( ( x / highest_dim ) * 4 ) - ( ( width / highest_dim ) * 2 ) ), ( ( ( y / highest_dim ) * 4 ) - ( ( height / highest_dim ) * 2 ) ) ]);
+                        // console.log(x, y)
+                    }
+                }
+            }
+
+            c.width = window.innerWidth;
+            c.height = window.innerHeight;
+
+            render_set();
+
+        </script>
     </body>
-    <body>
-        <div class="grid-container">
-            <h1 class="grid-number">1</h1>
-            <h1 class="grid-number">2</h1>
-            <h1 class="grid-number">3</h1>
-            <h1 class="grid-number">4</h1>
-            <h1 class="grid-number">5</h1>
-            <h1 class="grid-number">6</h1>
-            <h1 class="grid-number">7</h1>
-            <h1 class="grid-number">8</h1>
-            <h1 class="grid-number">1</h1>
-            <h1 class="grid-number">2</h1>
-            <h1 class="grid-number">3</h1>
-            <h1 class="grid-number">4</h1>
-            <h1 class="grid-number">5</h1>
-            <h1 class="grid-number">6</h1>
-            <h1 class="grid-number">7</h1>
-            <h1 class="grid-number">8</h1>
-            <h1 class="grid-number">1</h1>
-            <h1 class="grid-number">2</h1>
-            <h1 class="grid-number">3</h1>
-            <h1 class="grid-number">4</h1>
-            <h1 class="grid-number">5</h1>
-            <h1 class="grid-number">6</h1>
-            <h1 class="grid-number">7</h1>
-            <h1 class="grid-number">8</h1>
-            <h1 class="grid-number">1</h1>
-            <h1 class="grid-number">2</h1>
-            <h1 class="grid-number">3</h1>
-            <h1 class="grid-number">4</h1>
-          </div>
-    </body>
-    <body>
-        <iframe src="https://discord.com/widget?id=678250628753129502&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-    </body>
-    <script src="js/pixel-art-converter.js"></script>
 </html>
