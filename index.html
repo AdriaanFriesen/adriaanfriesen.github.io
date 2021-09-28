@@ -13,12 +13,35 @@
     </head>
     <body>
         <canvas id="canvas1" width="0px" height="0px"></canvas>
-        <script>
+        <script>    
             var c = document.getElementById("canvas1");
             var ctx = c.getContext("2d");
 
+            var mouse_pos_start = [null, null];
+            var mouse_pos_new = [null, null]
+            var dragging = null;
+
+            c.addEventListener('mousedown', function(evt) {
+                dragging = true;
+                mouse_pos_start = [evt.offsetX, evt.offsetY];
+            }, false)
+
+            c.addEventListener('mousemove', function(evt) {
+                mouse_pos_new = [evt.offsetX, evt.offsetY];
+                if (dragging) {
+                    ctx.translate(mouse_pos_new[0] - mouse_pos_start[0], mouse_pos_new[1] - mouse_pos_start[1]);
+                    mouse_pos_start = [evt.offsetX, evt.offsetY];
+                    render_set();
+                }
+            }, false);
+
+            c.addEventListener('mouseup', function(evt) {
+                dragging = false;
+            }, false)
+            
+
             window.addEventListener(
-            'resize', 
+            'resize',  
             function() { 
                 c.width = window.innerWidth;
                 c.height = window.innerHeight;
@@ -26,13 +49,12 @@
             }, 
             false);
 
-            ctx.fillStyle = "#000000";
-
             function render_set() {
-                var height = document.getElementById("canvas1").height;
-                var width = document.getElementById("canvas1").width;
 
-                var highest_dim = Math.max(height, width);
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, c.width, c.height);
+
+                var highest_dim = Math.max(c.width, c.height);
 
                 function complex_absolute(comp) {
                     return ( ( comp[0] ** 2 ) + ( comp[1] ** 2 ) ) ** 0.5;
@@ -57,14 +79,15 @@
                         i--;
                     }
                     if (complex_absolute(z) < 2) {
-                        ctx.fillRect(x, y, 1, 1);
+                        ctx.fillStyle = "#000000";
+                        ctx.fillRect(x, y, 4, 4);
                     }
                     // console.log(z[0], z[1]);
                 }
 
-                for (var y = 0; y <= height; y++) {
-                    for (var x = 0; x <= width; x++) {
-                        set_check([ ( ( ( x / highest_dim ) * 4 ) - ( ( width / highest_dim ) * 2 ) ), ( ( ( y / highest_dim ) * 4 ) - ( ( height / highest_dim ) * 2 ) ) ]);
+                for (var y = 0; y <= c.height; y += 4) {
+                    for (var x = 0; x <= c.width; x += 4) {
+                        set_check([ ( ( ( x / highest_dim ) * 4 ) - ( ( c.width / highest_dim ) * 2 ) ), ( ( ( y / highest_dim ) * 4 ) - ( ( c.height / highest_dim ) * 2 ) ) ]);
                         // console.log(x, y)
                     }
                 }
