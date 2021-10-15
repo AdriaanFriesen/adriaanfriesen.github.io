@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                perspective: 750px;
+                background: #343434;
+                
+            }
+            
+            [id*='spin-title'] {
+                font-family: serif;
+                font-size: 10em;
+                color: white;
+                position: absolute;
+                left: 12rem;
+                top: -0.2em;
+                text-shadow: 0 0 20px black;
+                padding-left: 0.2em;
+                padding-right: 0.2em;
+                border: 10px ridge grey;
+                /* border-bottom-style: solid; */
+            }
+            
+            #text {
+                position: absolute;
+                top: 25rem;
+                font-size: 2em;
+                font-family: serif;
+                color: white;
+                text-shadow: 1px 1px 0px white, 1px 1px 6px black, 1px 1px 6px black, 1px 1px 6px black, 1px 1px 6px black, 1px 1px 6px black, 1px 1px 6px black, 1px 1px 6px black;
+                border: 5px solid grey;
+                padding: 0;
+            }
+            
+            .image-plus-text {
+                display:flex;
+                flex-direction: row;
+                padding-right: -8em;
+            }
+            
+            .image-plus-text div {
+                width: 100px;
+            }
+            
+            #text-border {
+                border: 5px solid #999999;
+                padding-left: 2em;
+                padding-right: 1.5em;
+            }
+            
+            img {
+                width: 500px;
+                border: 5px solid grey;
+            }
+            
+            h2 {
+                font-size: 2em;
+                font-family: serif;
+            }
+            
+            
+         /* h1 .outline {
+                font-size: 12em;
+                color: white;
+                z-index: -1;
+                left: calc(50% - 12rem);
+            } */
+            
+         /* @keyframes wobble {
+                0% {transform: rotateX(15deg);}
+                50% {transform: rotateX(-15deg);}
+                100% {transform: rotateX(15deg);}
+            } */
+        </style>
+        <title>Les Catacombs</title>
+    </head>
+    <body>
+        <script>
+            let dynamicStyles = null;
+
+            function addAnimation(body) {
+                if (!dynamicStyles) {
+                    dynamicStyles = document.createElement('style');
+                    dynamicStyles.type = 'text/css';
+                    document.head.appendChild(dynamicStyles);
+                  }
+                
+                dynamicStyles.sheet.insertRule(body, dynamicStyles.length);
+            }
+            
+            for (let x = 0; x < 25; x++) {
+                var h1 = document.createElement('h1');
+                h1.id = "spin-title" + x;
+                h1.textContent = "Les Catacombs";
+                h1.style = "animation: spin-title" + x + " 16s infinite linear;";
+                document.body.appendChild(h1);
+                addAnimation(`
+                    @keyframes spin-title` + x + ` {
+                        0% {transform: rotateY(8deg) rotateX(0deg) translateZ(` + x + `px);}
+                        12.5% {transform: rotateY(0deg) rotateX(10deg) translateZ(` + x + `px);}
+                        25% {transform: rotateY(-8deg) rotateX(0deg) translateZ(` + x + `px);}
+                        37.5% {transform: rotateY(0deg) rotateX(-10deg) translateZ(` + x + `px);}
+                        50% {transform: rotateY(8deg) rotateX(0deg) translateZ(` + x + `px);}
+                        62.5% {transform: rotateY(0deg) rotateX(10deg) translateZ(` + x + `px);}
+                        75% {transform: rotateY(-8deg) rotateX(0deg) translateZ(` + x + `px);}
+                        87.5% {transform: rotateY(0deg) rotateX(-10deg) translateZ(` + x + `px);}
+                        100% {transform: rotateY(8deg) rotateX(0deg) translateZ(` + x + `px);}
+                    }
+                `);
+            }
+        </script>
+        
+        <div id="text">
+            <div id="text-border">
+                <p>
+                    <i>Les Catacombs</i> are a set of underground rooms and tunnels in Paris to store the contents of its overflowing cemetaries.
+                </p>
+
+                <h2>L'histoire</h2>
+
+                <p>
+                    At the end of the 11<sup>th</sup> century, Paris's central cemetary was overflowing with bodies. To solve this, bones from the long dead were packed into walls of cemetary galleries. By the late 1800's however, Paris decided to finally deal with its overflowing dead once and (hopefully) for all. Paris had lots of empty mines from when it was using the limestone underground for buildings. They cleaned out the mineshafts and started putting bones underground. Another of Paris's motives to put bones underground was reducing contamination in the water supply caused by water flowing through the cemetaries and into Parisian water.
+                </p>
+
+                <h2>Aujourd'hui</h2>
+                
+                <div class="image-plus-text">
+                    <p>
+                        Today, <i>Les Catacombs</i> are open to tourism. Tickets cost €27 (around $31 USD), and they are open to visits year-round. Once you have arrived at the entrance, you are greeted by a sign that says <i>"Arrête! C'est ici l'empire de la Mort"</i> ("Stop! This is the empire of Death") as you descend down the staircase.
+                    </p>
+                    
+                    <a href="https://commons.wikimedia.org/wiki/File:Paris_Catacombs_Entrance.jpg">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Paris_Catacombs_Entrance.jpg">
+                    </a>
+                </div>
+                
+                <div class="image-plus-text">
+                    <p>
+                        In <i>Les Catacombs</i>, there are rooms and hallways with walls made entirely of bones. This was done so that the space could utilised as efficient as possible to prevent Paris running out of space for bodies again. <i>Les Catacombs</i> spans a massive 11 square kilometers of total area, and to walk the whole thing is a 1.5 kilometer hike.
+                    <p/>
+                    
+                    <div></div>
+                    
+                    <a href="http://www.theladytravels.com/wp-content/uploads/Catacombes-de-Paris-Paris-Catacombs-rounded-corner-.jpg">
+                        <img src="http://www.theladytravels.com/wp-content/uploads/Catacombes-de-Paris-Paris-Catacombs-rounded-corner-.jpg">
+                    </a>
+                </div>
+                
+                <h2>Un Vidéo</h2>
+                
+                <iframe width="949" height="534" src="https://www.youtube.com/embed/FSBFurOhMPg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                
+            </div>
+        </div>
+    </body>
+</html>
