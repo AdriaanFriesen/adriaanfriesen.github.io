@@ -131,7 +131,17 @@
               -webkit-appearance: none;
               margin: 0;
             }
-        </style>    
+        </style>
+        <style media="screen">
+            #calculator-container {
+                flex-direction: row;
+            }
+        </style>
+        <style media="handheld">
+            #calculator-container {
+                flex-direction: column;
+            }
+        </style>
     </head>
     <body>
         <div id="header-container">
