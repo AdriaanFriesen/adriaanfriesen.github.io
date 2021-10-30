@@ -49,6 +49,12 @@
                 gap: 10px;
             }
 
+            @media only screen and (max-width: 600px) {
+                #calculator-container {
+                    flex-direction: column;
+                }
+            }
+
             #calculator-container > * {
                 background-color: #5f3e85;
                 border: 2px solid black;
@@ -130,16 +136,6 @@
             input::-webkit-inner-spin-button {
               -webkit-appearance: none;
               margin: 0;
-            }
-        </style>
-        <style media="screen">
-            #calculator-container {
-                flex-direction: row;
-            }
-        </style>
-        <style media="handheld">
-            #calculator-container {
-                flex-direction: column;
             }
         </style>
     </head>
