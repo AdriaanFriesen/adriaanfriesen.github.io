@@ -216,7 +216,7 @@
             document.getElementById("quad-approx").addEventListener("change", doQuadFormula);
             document.getElementById("quad-approx-digits").addEventListener("keyup", doQuadFormula);
             
-            function doQuadFormula() {
+            function doQuadFormula() { // TODO: Simplify radicals (ex. (20 ** 0.5) / 2 === 5 ** 0.5, and 8 ** 0.5 === 2 * (2 ** 0.5) )
                 var a = document.getElementById("quad-a").value;
                 var b = document.getElementById("quad-b").value;
                 var c = document.getElementById("quad-c").value;
@@ -232,9 +232,9 @@
                         else if (discrim < 0) {
                             var sol1Real = (-1 * b) / ( 2 * a);
                             var sol2Real = (-1 * b) / ( 2 * a);
-                            var solImag = ((b ** 2 - 4 * a * c) ** 0.5) / ( 2 * a);
-                            document.getElementById("sol-1").innerHTML = sol1 + " + " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
-                            document.getElementById("sol-2").innerHTML = sol2 + " - " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
+                            var solImag = ((-1 * (b ** 2 - 4 * a * c)) ** 0.5) / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = Number((sol1Real).toFixed(document.getElementById("quad-approx-digits").value)) + " + " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
+                            document.getElementById("sol-2").innerHTML = Number((sol2Real).toFixed(document.getElementById("quad-approx-digits").value)) + " - " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
                         }
                     }
                     else {
