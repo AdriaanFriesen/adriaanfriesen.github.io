@@ -89,6 +89,7 @@
             input {
                 background-color: #333333;
                 border: 1px solid black;
+                border-radius: 0px;
                 color: white;
                 font-family: "Myriad Pro", sans-serif;
                 font-size: 14px;
@@ -228,39 +229,41 @@
                 var c = document.getElementById("quad-c").value;
                 if (a.length > 0 && b.length > 0 && c.length > 0) {
                     var discrim = b ** 2 - 4 * a * c;
-                    if (document.getElementById("quad-approx").checked) {
-                        if (discrim >= 0) {
+                    if (document.getElementById("quad-approx").checked) { // User has requested approximate values
+                        if (discrim >= 0) { // Real solutions
                             var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
                             var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
                             document.getElementById("sol-1").innerHTML = Number((sol1).toFixed(document.getElementById("quad-approx-digits").value));
                             document.getElementById("sol-2").innerHTML = Number((sol2).toFixed(document.getElementById("quad-approx-digits").value));
                         }
-                        else if (discrim < 0) {
-                            var sol1Real = (-1 * b) / ( 2 * a);
-                            var sol2Real = (-1 * b) / ( 2 * a);
+                        else if (discrim < 0) { // Complex solutions
+                            var solReal = (-1 * b) / ( 2 * a);
                             var solImag = ((-1 * (b ** 2 - 4 * a * c)) ** 0.5) / ( 2 * a);
-                            document.getElementById("sol-1").innerHTML = Number((sol1Real).toFixed(document.getElementById("quad-approx-digits").value)) + " + " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
-                            document.getElementById("sol-2").innerHTML = Number((sol2Real).toFixed(document.getElementById("quad-approx-digits").value)) + " - " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
+                            document.getElementById("sol-1").innerHTML = Number((solReal).toFixed(document.getElementById("quad-approx-digits").value)) + " + " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
+                            document.getElementById("sol-2").innerHTML = Number((solReal).toFixed(document.getElementById("quad-approx-digits").value)) + " - " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
                         }
                     }
-                    else {
-                        if (discrim >= 0 && discrim ** 0.5 % 1 === 0) {
+                    else { // Give exact square roots
+                        if (discrim >= 0 && discrim ** 0.5 % 1 === 0) { // Real perfect square solutions
                             var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
                             var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
                             document.getElementById("sol-1").innerHTML = sol1;
                             document.getElementById("sol-2").innerHTML = sol2;
                         }
-                        else if (discrim >= 0) {
-                            var sol1 = (-1 * b) / ( 2 * a);
-                            var sol2 = (-1 * b) / ( 2 * a);
-                            document.getElementById("sol-1").innerHTML = sol1 + " + √<span class=\"overline\">" + discrim + "</span> / " + (2 * a);
-                            document.getElementById("sol-2").innerHTML = sol2 + " - √<span class=\"overline\">" + discrim + "</span> / " + (2 * a);
+                        else if (discrim < 0 && (-1 * discrim) ** 0.5 % 1 === 0) { // Complex perfect square solutions
+                            var sol = (-1 * b)  / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = sol + " + " + (((-1 * discrim) ** 0.5) / (2 * a)) + "<i>i</i>";
+                            document.getElementById("sol-2").innerHTML = sol + " - " + (((-1 * discrim) ** 0.5) / (2 * a)) + "<i>i</i>";
                         }
-                        else if (discrim < 0) {
-                            var sol1 = (-1 * b) / ( 2 * a);
-                            var sol2 = (-1 * b) / ( 2 * a);
-                            document.getElementById("sol-1").innerHTML = sol1 + " + <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + (2 * a);
-                            document.getElementById("sol-2").innerHTML = sol2 + " - <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + (2 * a);
+                        else if (discrim >= 0) { // Real solutions
+                            var sol = (-1 * b) / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span> / " + (2 * a);
+                            document.getElementById("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span> / " + (2 * a);
+                        }
+                        else if (discrim < 0) { // Complex solutions
+                            var sol = (-1 * b) / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + (2 * a);
+                            document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + (2 * a);
                         }
                     }
                 }
@@ -280,9 +283,9 @@
                 var y2 = document.getElementById("points-y2").value;
                 if (x1.length > 0 && y1.length > 0 && x2.length > 0 && y2.length > 0) {
                     var length = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5;
-                        if (length % 1 === 0) {
+                    if (length % 1 === 0) {
                             document.getElementById("length").innerHTML = length;
-                        }
+                    }
 
                         else {
                             if (document.getElementById("point-approx").checked) {
