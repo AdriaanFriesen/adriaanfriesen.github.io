@@ -223,7 +223,7 @@
             document.getElementById("quad-approx").addEventListener("change", doQuadFormula);
             document.getElementById("quad-approx-digits").addEventListener("keyup", doQuadFormula);
             
-            function doQuadFormula() { // TODO: Simplify radicals (ex. (20 ** 0.5) / 2 === 5 ** 0.5, and 8 ** 0.5 === 2 * (2 ** 0.5) )
+            function doQuadFormula() {
                 var a = document.getElementById("quad-a").value;
                 var b = document.getElementById("quad-b").value;
                 var c = document.getElementById("quad-c").value;
@@ -244,26 +244,49 @@
                         }
                     }
                     else { // Give exact square roots
-                        if (discrim >= 0 && discrim ** 0.5 % 1 === 0) { // Real perfect square solutions
+                        if (discrim >= 0 && discrim ** 0.5 % 1 == 0) { // Real perfect square solutions
                             var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
                             var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
                             document.getElementById("sol-1").innerHTML = sol1;
                             document.getElementById("sol-2").innerHTML = sol2;
                         }
-                        else if (discrim < 0 && (-1 * discrim) ** 0.5 % 1 === 0) { // Complex perfect square solutions
-                            var sol = (-1 * b)  / ( 2 * a);
-                            document.getElementById("sol-1").innerHTML = sol + " + " + (((-1 * discrim) ** 0.5) / (2 * a)) + "<i>i</i>";
-                            document.getElementById("sol-2").innerHTML = sol + " - " + (((-1 * discrim) ** 0.5) / (2 * a)) + "<i>i</i>";
+                        else if (discrim < 0 && (-1 * discrim) ** 0.5 % 1 == 0) { // Complex perfect square solutions
+                            var solReal = (-1 * b)  / ( 2 * a);
+                            var solImag = ((-1 * discrim) ** 0.5) / (2 * a);
+                            document.getElementById("sol-1").innerHTML = solReal + " + " + solImag + "<i>i</i>";
+                            document.getElementById("sol-2").innerHTML = solReal + " - " + solImag + "<i>i</i>";
                         }
                         else if (discrim >= 0) { // Real solutions
                             var sol = (-1 * b) / ( 2 * a);
-                            document.getElementById("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span> / " + (2 * a);
-                            document.getElementById("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span> / " + (2 * a);
+                            var bottom = 2 * 1;
+                            if (SQGPSF(discrim) !== 1) {
+                                var discrimCoef = SQGPSF(discrim);
+                                discrim /= discrimCoef ** 2;
+                                if (discrimCoef < bottom) {
+                                    bottom /= discrimCoef;
+                                    document.getElementById("sol-1").innerHTML = sol + " + " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                                    document.getElementById("sol-2").innerHTML = sol + " - " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                                }
+                                else if (discrimCoef > bottom) {
+                                    discrimCoef /= bottom;
+                                    document.getElementById("sol-1").innerHTML = sol + " + " + "√<span class=\"overline\">" + discrim + "</span>";
+                                    document.getElementById("sol-2").innerHTML = sol + " - " + "√<span class=\"overline\">" + discrim + "</span>";
+                                }
+                                else if (discrimCoef == bottom) {
+                                    document.getElementById("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span>";
+                                    document.getElementById("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span>";
+                                }
+                            }
+                            else {
+                                document.getElementById("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                                document.getElementById("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                            }
                         }
                         else if (discrim < 0) { // Complex solutions
                             var sol = (-1 * b) / ( 2 * a);
-                            document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + (2 * a);
-                            document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + (2 * a);
+                            var bottom = 2 * 1;
+                            document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + bottom;
+                            document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + bottom;
                         }
                     }
                 }
@@ -282,26 +305,44 @@
                 var x2 = document.getElementById("points-x2").value;
                 var y2 = document.getElementById("points-y2").value;
                 if (x1.length > 0 && y1.length > 0 && x2.length > 0 && y2.length > 0) {
-                    var length = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5;
-                    if (length % 1 === 0) {
+                    var unRootedLength = (x1 - x2) ** 2 + (y1 - y2) ** 2;
+                    var length = unRootedLength ** 0.5;
+                    if (length % 1 == 0) { // Length is a whole number
                             document.getElementById("length").innerHTML = length;
                     }
 
-                        else {
-                            if (document.getElementById("point-approx").checked) {
-                                document.getElementById("length").innerHTML = Number((length).toFixed(document.getElementById("point-approx-digits").value));
+                    else { // Length is an uneven square root
+                        if (document.getElementById("point-approx").checked) { // User has requested approximate values
+                            document.getElementById("length").innerHTML = Number((length).toFixed(document.getElementById("point-approx-digits").value));
 
+                        }
+                        else { // Give exact square roots
+                            if (SQGPSF(unRootedLength) !== 1) {
+                                lengthCoef = SQGPSF(unRootedLength);
+                                unRootedLength /= lengthCoef ** 2;
+                                document.getElementById("length").innerHTML = lengthCoef + "√<span class=\"overline\">" + unRootedLength + "</span>";
                             }
                             else {
-                                document.getElementById("length").innerHTML = "√<span class=\"overline\">" + ((x1 - x2) ** 2 + (y1 - y2) ** 2) + "</span>";
+                                document.getElementById("length").innerHTML = "√<span class=\"overline\">" + unRootedLength + "</span>";
                             }
                         }
+                    }
                     var midpointX = (x1 + x2) / 2;
                     var midpointY = (y1 + y2) / 2;
                     document.getElementById("midpoint-x").innerHTML = midpointX;
                     document.getElementById("midpoint-y").innerHTML = midpointY;
                 }
             }
+
+            function SQGPSF(n) {
+                // Return the square root of the greatest perfect sqaure factor of n
+                for (var i = n - 1; i > 0; i--) {
+                    if (n % i == 0 && i ** 0.5 % 1 == 0) {
+                        return i ** 0.5;
+                    }
+                }
+            }
+            
             doQuadFormula();
             doPointOps();
         </script>
