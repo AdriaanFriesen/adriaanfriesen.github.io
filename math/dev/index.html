@@ -111,7 +111,7 @@
                 font-size: 14px;
             }
             
-            .calculator-header-container, .approx-box, #quadratic-equation-input, #quadratic-solutions, #point-ops-input, .point-solution, #trig-input-label-container, .trig-input {
+            .calculator-header-container, .approx-box, #quadratic-equation-input, #quadratic-solutions, #point-ops-input, .point-solution, #trig-input-label-container, #trig-input-output-container, .trig-input, .trig-solution {
                 display: flex;
                 flex-direction: row;
             }
@@ -123,16 +123,16 @@
                 align-items: center;
             }
 
-            #point-solutions-container, #trig-label-container, #trig-input-container {
+            #point-solutions-container, #trig-label-container, #trig-input-container, #trig-solution-container {
                 display: flex;
                 flex-direction: column;
             }
 
-            #trig-label-container, #trig-input-container, .trig-input, #trig-input-label-container {
+            #trig-label-container, #trig-input-container, .trig-input, #trig-input-label-container, #trig-input-output-container, #trig-solution-container, .trig-solution {
                 gap: 5px;
             }
             
-            #quadratic-solutions > span, #foiler-solution > span, .point-solution > span {
+            #quadratic-solutions > span, #foiler-solution > span, .point-solution > span, .trig-solution > span {
                 color: #dddddd;
                 background-color: #6d1bb5;
                 border: 1px solid black;
@@ -141,6 +141,10 @@
             
             #quadratic-equation-input input, #foiler-input input, #point-ops-input input, .trig-input input {
                 width: 25px;
+            }
+
+            #trig-input-output-container {
+                align-items: center;
             }
             
             .overline {
@@ -279,21 +283,35 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="trig-input-label-container">
-                            <div id="trig-label-container">
-                                <span style="text-align: right;">Sides:&nbsp;</span>
-                                <span>Angles:&nbsp;</span>
-                            </div>
-                            <div id="trig-input-container">
-                                <div class="trig-input">
-                                    <input id="trig-a" type="number" placeholder="a">
-                                    <input id="trig-b" type="number" placeholder="b">
-                                    <input id="trig-c" type="number" placeholder="c">
+                        <div id="trig-input-output-container">
+                            <div id="trig-input-label-container">
+                                <div id="trig-label-container">
+                                    <span style="text-align: right;">Sides:&nbsp;</span>
+                                    <span>Angles:&nbsp;</span>
                                 </div>
-                                <div class="trig-input">
-                                    <input id="trig-A" type="number" placeholder="A">
-                                    <input id="trig-B" type="number" placeholder="B">
-                                    <input id="trig-C" type="number" placeholder="C">
+                                <div id="trig-input-container">
+                                    <div class="trig-input">
+                                        <input id="trig-a" type="number" placeholder="a">
+                                        <input id="trig-b" type="number" placeholder="b">
+                                        <input id="trig-c" type="number" placeholder="c">
+                                    </div>
+                                    <div class="trig-input">
+                                        <input id="trig-A" type="number" placeholder="A">
+                                        <input id="trig-B" type="number" placeholder="B">
+                                        <input id="trig-C" type="number" placeholder="C">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="trig-solution-container">
+                                <div class="trig-solution">
+                                    <span id="trig-output-a">N/A</span>
+                                    <span id="trig-output-b">N/A</span>
+                                    <span id="trig-output-c">N/A</span>
+                                </div>
+                                <div class="trig-solution">
+                                    <span id="trig-output-A">N/A</span>
+                                    <span id="trig-output-B">N/A</span>
+                                    <span id="trig-output-C">N/A</span>
                                 </div>
                             </div>
                         </div>
