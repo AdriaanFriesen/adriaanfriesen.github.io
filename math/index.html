@@ -399,22 +399,22 @@
                                 discrim /= discrimCoef ** 2;
                                 if (discrimCoef < bottom) {
                                     bottom /= discrimCoef;
-                                    document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
-                                    document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                                    document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
+                                    document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
                                 }
                                 else if (discrimCoef > bottom) {
                                     discrimCoef /= bottom;
-                                    document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + discrim + "</span>";
-                                    document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + discrim + "</span>";
+                                    document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
+                                    document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
                                 }
                                 else if (discrimCoef == bottom) {
-                                    document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + discrim + "</span>";
-                                    document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + discrim + "</span>";
+                                    document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
+                                    document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
                                 }
                             }
                             else {
-                                document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
-                                document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                                document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
+                                document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
                             }
                         }
                     }
