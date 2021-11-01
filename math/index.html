@@ -40,22 +40,38 @@
                 padding: 5px;
             }
 
-            #calculator-container {
+            #calculator-section-container {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 background-color: #611379;
                 border: 2px solid black;
                 padding: 10px;
                 gap: 10px;
             }
 
+            .calculator-set {
+                border: 2px solid black;
+                padding: 10px;
+                background-color: #6b387a;
+            }
+
+            .calculator-set-header {
+
+            }
+            
+            .calculator-container {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+            }
+
             @media only screen and (max-width: 1300px) {
-                #calculator-container {
+                .calculator-container {
                     flex-direction: column;
                 }
             }
 
-            #calculator-container > * {
+            .calculator-container > * {
                 background-color: #5f3e85;
                 border: 2px solid black;
                 padding: 5px;
@@ -63,7 +79,7 @@
                 flex: 1;
             }
 
-            #calculator-container > * > * {
+            .calculator-container > * > * {
                 padding: 0;
                 height: auto;
             }
@@ -95,31 +111,35 @@
                 font-size: 14px;
             }
             
-            .calculator-header-container, .approx-box, #quadratic-equation-input, #quadratic-solutions, #point-ops-input, .point-solution {
+            .calculator-header-container, .approx-box, #quadratic-equation-input, #quadratic-solutions, #point-ops-input, .point-solution, #trig-input-label-container, .trig-input {
                 display: flex;
                 flex-direction: row;
             }
             
-            #quadratic-solutions, .point-solution {
+            #quadratic-solutions, #foiler-solution, .point-solution {
                 padding-top: 10px;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
             }
 
-            .point-solutions-container {
+            #point-solutions-container, #trig-label-container, #trig-input-container {
                 display: flex;
                 flex-direction: column;
             }
+
+            #trig-label-container, #trig-input-container, .trig-input, #trig-input-label-container {
+                gap: 5px;
+            }
             
-            #quadratic-solutions > span, .point-solution > span {
+            #quadratic-solutions > span, #foiler-solution > span, .point-solution > span {
                 color: #dddddd;
                 background-color: #6d1bb5;
                 border: 1px solid black;
                 padding: 5px;
             }
             
-            #quadratic-equation-input input, #point-ops-input input {
+            #quadratic-equation-input input, #foiler-input input, #point-ops-input input, .trig-input input {
                 width: 25px;
             }
             
@@ -127,12 +147,12 @@
                 text-decoration: overline;
             }
 
-            /* Firefox */
+            /* Get rid of number input's up and down buttons in Firefox */
             input[type=number] {
                 -moz-appearance: textfield;
             }
             
-            /* Everything else (isn't Firefox's simpler, better, and more intuitive?) */
+            /* Do the same thing in everything else (isn't Firefox's simpler, better, and more intuitive?) */
             input::-webkit-outer-spin-button,
             input::-webkit-inner-spin-button {
               -webkit-appearance: none;
@@ -144,76 +164,162 @@
         <div id="header-container">
             <h1>/math</h1>
             <h2><a href="../">../</a></h4>
+            <noscript><h1 style="font-size: 60px; margin-top: 0; padding-left: 40px; color: red;">you need js, sorry</h1></noscript>
+            <noscript><h1 style="font-size: 20px; margin-top: 35px; padding-left: 40px; color: red;">(there's no spookiness i promise)</h1></noscript>
         </div>
-        <div id="calculator-container">
-            <div>
-                <div class="calculator-header-container">
-                    <h3>Quadratic Operations</h3>
-                    <div class="approx-box">
-                        <label>
-                            <input id="quad-approx" type="checkbox">Approximate to&nbsp;
-                        </label>
-                        <label>
-                            <input id="quad-approx-digits" type="number" placeholder="0">&nbsp;digits
-                        </label>
+        
+        <div id="calculator-section-container">
+            <div class="calculator-set">
+                <div class="calculator-set-header">
+                    <h1>Algebra</h1>
+                </div>
+                <div class="calculator-container">
+                    <div>
+                        <div class="calculator-header-container">
+                            <h3>Quadratic Operations</h3>
+                            <div class="approx-box">
+                                <label>
+                                    <input id="quad-approx" type="checkbox">Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="quad-approx-digits" type="number" placeholder="0">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
+                        <div id="quadratic-equation-input">
+                            <label>
+                                <input id="quad-a" type="number" placeholder="a">
+                            </label>
+                            &nbsp;x<sup>2</sup>&nbsp;+&nbsp;
+                            <label>
+                                <input id="quad-b" type="number" placeholder="b">
+                            </label>
+                            &nbsp;x&nbsp;+&nbsp;
+                            <label>
+                                <input id="quad-c" type="number" placeholder="c">
+                            </label>
+                        </div>
+                        <div id="quadratic-solutions">
+                            Solutions:&nbsp;<span id="sol-1">N/A</span>,&nbsp;<span id="sol-2">N/A</span>
+                        </div>
                     </div>
-                </div>
-                <div id="quadratic-equation-input">
-                    <label>
-                        <input id="quad-a" type="number" placeholder="a">
-                    </label>
-                    &nbsp;x<sup>2</sup>&nbsp;+&nbsp;&nbsp;
-                    <label>
-                        <input id="quad-b" type="number" placeholder="b">
-                    </label>
-                    &nbsp;x&nbsp;+&nbsp;&nbsp;
-                    <label>
-                        <input id="quad-c" type="number" placeholder="c">
-                    </label>
-                </div>
-                <div id="quadratic-solutions">
-                    Solutions:&nbsp;<span id="sol-1">N/A</span>,&nbsp;<span id="sol-2">N/A</span>
+                    <div>
+                        <div class="calculator-header-container">
+                            <h3>FOILer</h3>
+                        </div>
+                        <div id="foiler-input">
+                            <label>
+                                (<input id="foiler-a" type="number" placeholder="a">x&nbsp;+
+                            </label>
+                            <label>
+                                <input id="foiler-b" type="number" placeholder="b">)&nbsp;
+                            </label>
+                            <label>
+                                (<input id="foiler-c" type="number" placeholder="c">x&nbsp;+
+                            </label>
+                            <label>
+                                <input id="foiler-d" type="number" placeholder="d">)
+                            </label>
+                        </div>
+                        <div id="foiler-solution">
+                            Solution:&nbsp;<span id="foiled-poly">N/A</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="calculator-header-container">
+                            <h3>Point Operations</h3>
+                            <div class="approx-box">
+                                <label>
+                                    <input id="point-approx" type="checkbox">Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="point-approx-digits" type="number" placeholder="0">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
+                        <div id="point-ops-input">
+                            <label>
+                                (<input id="points-x1" type="number" placeholder="x1">,&nbsp;
+                            </label>
+                            <label>
+                                <input id="points-y1" type="number" placeholder="y1">)&nbsp;
+                            </label>
+                            <label>
+                                (<input id="points-x2" type="number" placeholder="x2">,&nbsp;
+                            </label>
+                            <label>
+                                <input id="points-y2" type="number" placeholder="y2">)
+                            </label>
+                        </div>
+                        <div id="point-solutions-container">
+                            <div class="point-solution">
+                                Length:&nbsp;<span id="length">N/A</span>
+                            </div>
+                            <div class="point-solution">
+                                Midpoint:&nbsp;(<span id="midpoint-x">N/A</span>,&nbsp;<span id="midpoint-y">N/A</span>)
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div class="calculator-header-container">
-                    <h3>Point Operations</h3>
-                    <div class="approx-box">
-                        <label>
-                            <input id="point-approx" type="checkbox">Approximate to&nbsp;
-                        </label>
-                        <label>
-                            <input id="point-approx-digits" type="number" placeholder="0">&nbsp;digits
-                        </label>
-                    </div>
+            <div class="calculator-set">
+                <div class="calculator-set-header">
+                    <h1>Geometry</h1>
                 </div>
-                <div id="point-ops-input">
-                    <label>
-                        (<input id="points-x1" type="number" placeholder="x1">,&nbsp;
-                    </label>
-                    <label>
-                        <input id="points-y1" type="number" placeholder="y1">)&nbsp;
-                    </label>
-                    <label>
-                        (<input id="points-x2" type="number" placeholder="x2">,&nbsp;
-                    </label>
-                    <label>
-                        <input id="points-y2" type="number" placeholder="y2">)
-                    </label>
+                <div class="calculator-container">
+                    <h2 style="padding: 20px; font-size: 40px;">Coming soon!</h2>
                 </div>
-                <div class="point-solutions-container">
-                    <div class="point-solution">
-                        Length:&nbsp;<span id="length">N/A</span>
+                <!-- 
+                    ############                                                ############
+                    ############ Hey! Stay away! This stuff is for next update! ############
+                    ############                                                ############
+                 -->
+                <!-- <div class="calculator-container">
+                    <div>
+                        <div class="calculator-header-container">
+                            <h3>Triangle Trig</h3>
+                            <div class="approx-box">
+                                <label>
+                                    <input id="trig-approx" type="checkbox">Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="trig-approx-digits" type="number" placeholder="0">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
+                        <div id="trig-input-label-container">
+                            <div id="trig-label-container">
+                                <span style="text-align: right;">Sides:&nbsp;</span>
+                                <span>Angles:&nbsp;</span>
+                            </div>
+                            <div id="trig-input-container">
+                                <div class="trig-input">
+                                    <input id="trig-a" type="number" placeholder="a">
+                                    <input id="trig-b" type="number" placeholder="b">
+                                    <input id="trig-c" type="number" placeholder="c">
+                                </div>
+                                <div class="trig-input">
+                                    <input id="trig-A" type="number" placeholder="A">
+                                    <input id="trig-B" type="number" placeholder="B">
+                                    <input id="trig-C" type="number" placeholder="C">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="point-solution">
-                        Midpoint:&nbsp;(<span id="midpoint-x">N/A</span>,&nbsp;<span id="midpoint-y">N/A</span>)
+                    <div>
+                        <div class="calculator-header-container">
+                            <h3>Circles</h3>
+                            <div class="approx-box">
+                                <label>
+                                    <input id="circle-approx" type="checkbox">Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="circle-approx-digits" type="number" placeholder="0">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div>
-                <h3>Triangle Trig</h3>
-                <h1>Coming Soon<sup>TM</sup>!</h1>
-                <h4>(trig is a pain to implement)</h4>
+                </div> -->
             </div>
         </div>
         <script>
@@ -227,7 +333,10 @@
                 var a = document.getElementById("quad-a").value;
                 var b = document.getElementById("quad-b").value;
                 var c = document.getElementById("quad-c").value;
-                if (a.length > 0 && b.length > 0 && c.length > 0) {
+                if (a.length) {
+                    var a = Number(a);
+                    var a = Number(a);
+                    var a = Number(a);
                     var discrim = b ** 2 - 4 * a * c;
                     if (document.getElementById("quad-approx").checked) { // User has requested approximate values
                         if (discrim >= 0) { // Real solutions
@@ -258,7 +367,7 @@
                         }
                         else if (discrim >= 0) { // Real solutions
                             var sol = (-1 * b) / ( 2 * a);
-                            var bottom = 2 * 1;
+                            var bottom = 2 * a;
                             if (SQGPSF(discrim) !== 1) {
                                 var discrimCoef = SQGPSF(discrim);
                                 discrim /= discrimCoef ** 2;
@@ -284,9 +393,9 @@
                         }
                         else if (discrim < 0) { // Complex solutions
                             var sol = (-1 * b) / ( 2 * a);
-                            var bottom = 2 * 1;
+                            var bottom = 2 * a;
                             if (SQGPSF(discrim) !== 1) {
-                                var discrimCoef = SQGPSF(discrim);
+                                var discrimCoef = SQGPSF(-1 * discrim);
                                 discrim /= discrimCoef ** 2;
                                 if (discrimCoef < bottom) {
                                     bottom /= discrimCoef;
@@ -307,11 +416,18 @@
                                 document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
                                 document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
                             }
-                            document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + bottom;
-                            document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + bottom;
                         }
                     }
                 }
+            }
+
+            document.getElementById("foiler-a").addEventListener("keyup", doFOIL);
+            document.getElementById("foiler-b").addEventListener("keyup", doFOIL);
+            document.getElementById("foiler-c").addEventListener("keyup", doFOIL);
+            document.getElementById("foiler-d").addEventListener("keyup", doFOIL);
+
+            function doFOIL() {
+                document.getElementById("foiled-poly").innerHTML = (Number(document.getElementById("foiler-a").value) * Number(document.getElementById("foiler-c").value)) + "x<sup>2</sup> + " + ((Number(document.getElementById("foiler-a").value) + Number(document.getElementById("foiler-d").value)) + (Number(document.getElementById("foiler-b").value) + Number(document.getElementById("foiler-c").value))) + "x + " + (Number(document.getElementById("foiler-b").value) * Number(document.getElementById("foiler-d").value));
             }
             
             document.getElementById("points-x1").addEventListener("keyup", doPointOps);
@@ -356,6 +472,10 @@
                 }
             }
 
+            // function doTrig() {
+                
+            // }
+
             function SQGPSF(n) {
                 // Return the square root of the greatest perfect sqaure factor of n
                 for (var i = n - 1; i > 0; i--) {
@@ -366,7 +486,9 @@
             }
             
             doQuadFormula();
+            doFOIL();
             doPointOps();
+            // doTrig();
         </script>
     </body>
 </html>
