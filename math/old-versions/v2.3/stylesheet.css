@@ -9,7 +9,6 @@ body {
     background-color: #454046;
     color: white;
     font-family: "Myriad Pro", sans-serif;
-    font-size: 16   px;
 }
 
 #header-container {
@@ -188,73 +187,6 @@ input {
 }
 
 @media only screen and (max-width: 1300px) {
-    body {
-        font-size: 32px;
-    }
-    #header-container > h1 {
-        font-size: 120px;
-    }
-
-    #header-container > h2, #header-container > div > h3 {
-        padding-top: 17px;
-        padding-left: 10px;
-    }
-
-    a:link, a:visited {
-        border: 2px solid black;
-        padding: 10px;
-    }
-
-    .calculator-container > * {
-        background-color: #5f3e85;
-        border: 4px solid black;
-        padding: 10px;
-    }
-
-    input {
-        border: 2px solid black;
-        font-size: 28px;
-    }
-
-    .top-spaced {
-        padding-top: 20px;
-    }
-
-    .border-1 {
-        border: 4px solid black;
-    }
-
-    .border-2 {
-        border: 2px solid black;
-    }
-
-    .solutions > span, .solutions > div {
-        border: 2px solid black;
-        padding: 10px;
-    }
-
-    input {
-        width: 50px;
-    }
-
-    .input-height-label {
-        width: 44px;
-    }
-
-    .output-height-label {
-        height: 59px;
-    }
-
-    .output-height-input {
-        margin-top: 12px;
-        margin-bottom: 8px;
-    }
-
-    .approx-box input[type=text] {
-        width: 50px;
-        height: 30px;
-    }
-    
     .calculator-container {
         flex-direction: column;
     }

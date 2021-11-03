@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>/math</title>
+        <link rel="stylesheet" href="stylesheet.css">
+    </head>
+    <body>
+        <div id="header-container">
+            <h1>/math</h1>
+            <h2><a href="../">../</a></h2>
+            <div style="margin-left: auto;margin-right: 0;">    
+                <h3><a href="./old-versions">Old Versions</a></h3>
+            </div>
+            <noscript><h1 style="font-size: 60px; margin-top: 0; padding-left: 40px; color: red;">you need js, sorry</h1></noscript>
+            <noscript><h1 style="font-size: 20px; margin-top: 35px; padding-left: 40px; color: red;">(there's no spookiness i promise)</h1></noscript>
+        </div>
+        
+        <div class="column flex-spaced-1 spaced color-layer-1 border-1">
+            <div class="color-layer-2 border-1 spaced"> 
+                <h1>Algebra</h1>
+                <div class="row flex-spaced-1 calculator-container">
+                    <div>
+                        <div class="row">
+                            <h3>Quadratic Operations</h3>
+                            <div class="row approx-box">
+                                <label>
+                                    <input id="quad-approx" type="checkbox">Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="quad-approx-digits" type="number" placeholder="2">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label>
+                                <input id="quad-a" type="text" placeholder="a">
+                            </label>
+                            &nbsp;x<sup>2</sup>&nbsp;+&nbsp;
+                            <label>
+                                <input id="quad-b" type="text" placeholder="b">
+                            </label>
+                            &nbsp;x&nbsp;+&nbsp;
+                            <label>
+                                <input id="quad-c" type="text" placeholder="c">
+                            </label>
+                        </div>
+                        <div class="row top-spaced align-center solutions">
+                            Solutions:&nbsp;<span id="sol-1">N/A</span>,&nbsp;<span id="sol-2">N/A</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>FOILer</h3>
+                        <div class="row">
+                            <label>
+                                (<input id="foiler-a" type="text" placeholder="a">x&nbsp;
+                            </label>
+                            <label>
+                                +&nbsp;<input id="foiler-b" type="text" placeholder="b">)&nbsp;
+                            </label>
+                            <label>
+                                (<input id="foiler-c" type="text" placeholder="c">x&nbsp;
+                            </label>
+                            <label>
+                                +&nbsp;<input id="foiler-d" type="text" placeholder="d">)
+                            </label>
+                        </div>
+                        <div class="row top-spaced align-center solutions">
+                            Solution:&nbsp;<span id="foiled-poly">N/A</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <h3>Point Operations</h3>
+                            <div class="row approx-box">
+                                <label>
+                                    <input id="point-approx" type="checkbox">Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="point-approx-digits" type="number" placeholder="2">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label>
+                                (<input id="points-x1" type="text" placeholder="x1">,&nbsp;
+                            </label>
+                            <label>
+                                <input id="points-y1" type="text" placeholder="y1">)&nbsp;
+                            </label>
+                            <label>
+                                (<input id="points-x2" type="text" placeholder="x2">,&nbsp;
+                            </label>
+                            <label>
+                                <input id="points-y2" type="text" placeholder="y2">)
+                            </label>
+                        </div>
+                        <div class="column">
+                            <div class="row top-spaced text-center solutions">
+                                Length:&nbsp;<span id="length">N/A</span>
+                            </div>
+                            <div class="row top-spaced text-center solutions">
+                                Midpoint:&nbsp;(<span id="midpoint-x">N/A</span>,&nbsp;<span id="midpoint-y">N/A</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="color-layer-2 border-1 spaced">
+                <h1>Geometry</h1>
+                <div class="row flex-spaced-1 calculator-container">
+                    <div>
+                        <div class="row">
+                            <h3>Triangle Trig</h3>
+                            <div class="row approx-box">
+                                <label>
+                                    <input id="trig-approx" type="checkbox" disabled checked>Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="trig-approx-digits" type="number" placeholder="2">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row flex-spaced-2">
+                            <div class="row flex-spaced-2 align-center">
+                                <div class="column flex-spaced-2">
+                                    <div class="centered-content justify-right input-height">Sides:&nbsp;</div>
+                                    <div class="centered-content justify-right input-height">Angles:&nbsp;</div>
+                                </div>
+                                <div class="column flex-spaced-2">
+                                    <div class="row flex-spaced-2">
+                                        <input id="trig-a" type="text" placeholder="a">
+                                        <input id="trig-b" type="text" placeholder="b">
+                                        <input id="trig-c" type="text" placeholder="c">
+                                    </div>
+                                    <div class="row flex-spaced-2">
+                                        <input id="trig-A" type="text" placeholder="A">
+                                        <input id="trig-B" type="text" placeholder="B">
+                                        <input id="trig-C" type="text" placeholder="C">
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 20px;"></div>
+                            <div class="row flex-spaced-2" style="height: 69px;">
+                                <div class="centered-content text-center">Solved<br>Triangle:&nbsp;</div>
+                                <div id="trig-sol" class="row flex-spaced-2">
+                                    <div class="column flex-spaced-2 solutions">
+                                        <span id="trig-output-a">N/A</span>
+                                        <span id="trig-output-A">N/A</span>
+                                    </div>
+                                    <div class="column flex-spaced-2 solutions">
+                                        <span id="trig-output-b">N/A</span>
+                                        <span id="trig-output-B">N/A</span>
+                                    </div>
+                                    <div class="column flex-spaced-2 solutions">
+                                        <span id="trig-output-c">N/A</span>
+                                        <span id="trig-output-C">N/A</span>
+                                    </div>
+                                </div>
+                                <div class="centered-content justify-center align-center text-center solutions">
+                                    <span id="trig-no-sol"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    <div>
+                        <div class="row">
+                            <h3>Circles</h3>
+                            <div class="row approx-box">
+                                <label>
+                                    <input id="circle-approx" type="checkbox" checked>Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="circle-approx-digits" type="number" placeholder="2">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row flex-spaced-2">
+                            <div class="column flex-spaced-2">
+                                <div class="centered-content justify-right output-height-label">Radius:&nbsp;</div>
+                                <div class="centered-content justify-right output-height-label">Diameter:&nbsp;</div>
+                                <div class="centered-content justify-right output-height-label">Circumference:&nbsp;</div>
+                                <div class="centered-content justify-right output-height-label">Area:&nbsp;</div>
+                            </div>
+                            <div class="column flex-spaced-2">
+                                <input class="output-height-input" id="circle-radius" type="text" placeholder="r">
+                                <input class="output-height-input" id="circle-diameter" type="text" placeholder="d">
+                                <input class="output-height-input" id="circle-circumference" type="text" placeholder="c">
+                                <input class="output-height-input" id="circle-area" type="text" placeholder="a">
+                            </div>
+                            <div id="circle-sol" class="column flex-spaced-2 solutions">
+                                <span id="circle-output-radius">N/A</span>
+                                <span id="circle-output-diameter">N/A</span>
+                                <span id="circle-output-circumference">N/A</span>
+                                <span id="circle-output-area">N/A</span>
+                            </div>
+                            <div class="centered-content justify-center align-center text-center solutions">
+                                <span id="circle-no-sol"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="javascript.js"></script>
+    </body>
+</html>
