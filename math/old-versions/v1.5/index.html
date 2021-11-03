@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>/math</title>
+                
+        <style>
+            @font-face {
+                font-family: 'Myriad Pro';
+                font-style: normal;
+                font-weight: 600;
+                src: local('Myriad Pro'), url('https://fonts.cdnfonts.com/s/492/MYRIADPRO-SEMIBOLD.woff') format('woff');
+            }
+
+            body {
+                background-color: #454046;
+                color: white;
+                font-family: "Myriad Pro", sans-serif;
+            }
+
+            #header-container {
+                display: flex;
+                flex-direction: row;
+            }
+            
+            #header-container > h1 {
+                font-size: 60px;
+                margin-top: 0;
+            }
+
+            #header-container > h2 {
+                padding-top: 8.5px;
+                padding-left: 5px;
+            }
+
+            a:link, a:visited {
+                color: #84a8f7;
+                background-color: #5f3e85;
+                border: 1px solid black;
+                padding: 5px;
+            }
+
+            #calculator-container {
+                display: flex;
+                flex-direction: row;
+                background-color: #611379;
+                border: 2px solid black;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            @media only screen and (max-width: 1300px) {
+                #calculator-container {
+                    flex-direction: column;
+                }
+            }
+
+            #calculator-container > * {
+                background-color: #5f3e85;
+                border: 2px solid black;
+                padding: 5px;
+                height: auto;
+                flex: 1;
+            }
+
+            #calculator-container > * > * {
+                padding: 0;
+                height: auto;
+            }
+
+            .calculator-header-container {
+                flex: 1;
+            }
+
+            .approx-box {
+                margin-left: auto;
+                margin-right: 0;
+            }
+
+            .approx-box > label {
+                align-items: center;
+            }
+
+            .approx-box input[type=number] {
+                width: 25px;
+                height: 18px;
+            }
+            
+            input {
+                background-color: #333333;
+                border: 1px solid black;
+                border-radius: 0px;
+                color: white;
+                font-family: "Myriad Pro", sans-serif;
+                font-size: 14px;
+            }
+            
+            .calculator-header-container, .approx-box, #quadratic-equation-input, #quadratic-solutions, #point-ops-input, .point-solution {
+                display: flex;
+                flex-direction: row;
+            }
+            
+            #quadratic-solutions, .point-solution {
+                padding-top: 10px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .point-solutions-container {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            #quadratic-solutions > span, .point-solution > span {
+                color: #dddddd;
+                background-color: #6d1bb5;
+                border: 1px solid black;
+                padding: 5px;
+            }
+            
+            #quadratic-equation-input input, #point-ops-input input {
+                width: 25px;
+            }
+            
+            .overline {
+                text-decoration: overline;
+            }
+
+            /* Firefox */
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+            
+            /* Everything else (isn't Firefox's simpler, better, and more intuitive?) */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header-container">
+            <h1>/math</h1>
+            <h2><a href="../">../</a></h4>
+        </div>
+        <div id="calculator-container">
+            <div>
+                <div class="calculator-header-container">
+                    <h3>Quadratic Operations</h3>
+                    <div class="approx-box">
+                        <label>
+                            <input id="quad-approx" type="checkbox">Approximate to&nbsp;
+                        </label>
+                        <label>
+                            <input id="quad-approx-digits" type="number" placeholder="0">&nbsp;digits
+                        </label>
+                    </div>
+                </div>
+                <div id="quadratic-equation-input">
+                    <label>
+                        <input id="quad-a" type="number" placeholder="a">
+                    </label>
+                    &nbsp;x<sup>2</sup>&nbsp;+&nbsp;&nbsp;
+                    <label>
+                        <input id="quad-b" type="number" placeholder="b">
+                    </label>
+                    &nbsp;x&nbsp;+&nbsp;&nbsp;
+                    <label>
+                        <input id="quad-c" type="number" placeholder="c">
+                    </label>
+                </div>
+                <div id="quadratic-solutions">
+                    Solutions:&nbsp;<span id="sol-1">N/A</span>,&nbsp;<span id="sol-2">N/A</span>
+                </div>
+            </div>
+            <div>
+                <div class="calculator-header-container">
+                    <h3>Point Operations</h3>
+                    <div class="approx-box">
+                        <label>
+                            <input id="point-approx" type="checkbox">Approximate to&nbsp;
+                        </label>
+                        <label>
+                            <input id="point-approx-digits" type="number" placeholder="0">&nbsp;digits
+                        </label>
+                    </div>
+                </div>
+                <div id="point-ops-input">
+                    <label>
+                        (<input id="points-x1" type="number" placeholder="x1">,&nbsp;
+                    </label>
+                    <label>
+                        <input id="points-y1" type="number" placeholder="y1">)&nbsp;
+                    </label>
+                    <label>
+                        (<input id="points-x2" type="number" placeholder="x2">,&nbsp;
+                    </label>
+                    <label>
+                        <input id="points-y2" type="number" placeholder="y2">)
+                    </label>
+                </div>
+                <div class="point-solutions-container">
+                    <div class="point-solution">
+                        Length:&nbsp;<span id="length">N/A</span>
+                    </div>
+                    <div class="point-solution">
+                        Midpoint:&nbsp;(<span id="midpoint-x">N/A</span>,&nbsp;<span id="midpoint-y">N/A</span>)
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Triangle Trig</h3>
+                <h1>Coming Soon<sup>TM</sup>!</h1>
+                <h4>(trig is a pain to implement)</h4>
+            </div>
+        </div>
+        <script>
+            document.getElementById("quad-a").addEventListener("keyup", doQuadFormula);
+            document.getElementById("quad-b").addEventListener("keyup", doQuadFormula);
+            document.getElementById("quad-c").addEventListener("keyup", doQuadFormula);
+            document.getElementById("quad-approx").addEventListener("change", doQuadFormula);
+            document.getElementById("quad-approx-digits").addEventListener("keyup", doQuadFormula);
+            
+            function doQuadFormula() { // TODO: Simplify radicals (ex. (20 ** 0.5) / 2 === 5 ** 0.5, and 8 ** 0.5 === 2 * (2 ** 0.5) )
+                var a = document.getElementById("quad-a").value;
+                var b = document.getElementById("quad-b").value;
+                var c = document.getElementById("quad-c").value;
+                if (a.length > 0 && b.length > 0 && c.length > 0) {
+                    var discrim = b ** 2 - 4 * a * c;
+                    if (document.getElementById("quad-approx").checked) { // User has requested approximate values
+                        if (discrim >= 0) { // Real solutions
+                            var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
+                            var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = Number((sol1).toFixed(document.getElementById("quad-approx-digits").value));
+                            document.getElementById("sol-2").innerHTML = Number((sol2).toFixed(document.getElementById("quad-approx-digits").value));
+                        }
+                        else if (discrim < 0) { // Complex solutions
+                            var solReal = (-1 * b) / ( 2 * a);
+                            var solImag = ((-1 * (b ** 2 - 4 * a * c)) ** 0.5) / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = Number((solReal).toFixed(document.getElementById("quad-approx-digits").value)) + " + " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
+                            document.getElementById("sol-2").innerHTML = Number((solReal).toFixed(document.getElementById("quad-approx-digits").value)) + " - " + Number((solImag).toFixed(document.getElementById("quad-approx-digits").value)) + "<i>i</i>";
+                        }
+                    }
+                    else { // Give exact square roots
+                        if (discrim >= 0 && discrim ** 0.5 % 1 === 0) { // Real perfect square solutions
+                            var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
+                            var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = sol1;
+                            document.getElementById("sol-2").innerHTML = sol2;
+                        }
+                        else if (discrim < 0 && (-1 * discrim) ** 0.5 % 1 === 0) { // Complex perfect square solutions
+                            var sol = (-1 * b)  / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = sol + " + " + (((-1 * discrim) ** 0.5) / (2 * a)) + "<i>i</i>";
+                            document.getElementById("sol-2").innerHTML = sol + " - " + (((-1 * discrim) ** 0.5) / (2 * a)) + "<i>i</i>";
+                        }
+                        else if (discrim >= 0) { // Real solutions
+                            var sol = (-1 * b) / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span> / " + (2 * a);
+                            document.getElementById("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span> / " + (2 * a);
+                        }
+                        else if (discrim < 0) { // Complex solutions
+                            var sol = (-1 * b) / ( 2 * a);
+                            document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + (2 * a);
+                            document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -discrim + "</span> / " + (2 * a);
+                        }
+                    }
+                }
+            }
+            
+            document.getElementById("points-x1").addEventListener("keyup", doPointOps);
+            document.getElementById("points-y1").addEventListener("keyup", doPointOps);
+            document.getElementById("points-x2").addEventListener("keyup", doPointOps);
+            document.getElementById("points-y2").addEventListener("keyup", doPointOps);
+            document.getElementById("point-approx").addEventListener("change", doPointOps);
+            document.getElementById("point-approx-digits").addEventListener("keyup", doPointOps);
+
+            function doPointOps() {
+                var x1 = document.getElementById("points-x1").value;
+                var y1 = document.getElementById("points-y1").value;
+                var x2 = document.getElementById("points-x2").value;
+                var y2 = document.getElementById("points-y2").value;
+                if (x1.length > 0 && y1.length > 0 && x2.length > 0 && y2.length > 0) {
+                    var length = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5;
+                    if (length % 1 === 0) {
+                            document.getElementById("length").innerHTML = length;
+                    }
+
+                        else {
+                            if (document.getElementById("point-approx").checked) {
+                                document.getElementById("length").innerHTML = Number((length).toFixed(document.getElementById("point-approx-digits").value));
+
+                            }
+                            else {
+                                document.getElementById("length").innerHTML = "√<span class=\"overline\">" + ((x1 - x2) ** 2 + (y1 - y2) ** 2) + "</span>";
+                            }
+                        }
+                    var midpointX = (x1 + x2) / 2;
+                    var midpointY = (y1 + y2) / 2;
+                    document.getElementById("midpoint-x").innerHTML = midpointX;
+                    document.getElementById("midpoint-y").innerHTML = midpointY;
+                }
+            }
+            doQuadFormula();
+            doPointOps();
+        </script>
+    </body>
+</html>

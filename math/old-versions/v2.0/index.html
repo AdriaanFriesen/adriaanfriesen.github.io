@@ -55,10 +55,6 @@
                 background-color: #6b387a;
             }
 
-            .calculator-set-header {
-
-            }
-            
             .calculator-container {
                 display: flex;
                 flex-direction: row;
@@ -111,7 +107,7 @@
                 font-size: 14px;
             }
             
-            .calculator-header-container, .approx-box, #quadratic-equation-input, #quadratic-solutions, #point-ops-input, .point-solution, #trig-input-label-container, #trig-input-output-container, .trig-input, .trig-solution {
+            .calculator-header-container, .approx-box, #quadratic-equation-input, #quadratic-solutions, #point-ops-input, .point-solution, #trig-input-label-container, .trig-input {
                 display: flex;
                 flex-direction: row;
             }
@@ -123,16 +119,16 @@
                 align-items: center;
             }
 
-            #point-solutions-container, #trig-label-container, #trig-input-container, #trig-solution-container {
+            #point-solutions-container, #trig-label-container, #trig-input-container {
                 display: flex;
                 flex-direction: column;
             }
 
-            #trig-label-container, #trig-input-container, .trig-input, #trig-input-label-container, #trig-input-output-container, #trig-solution-container, .trig-solution {
+            #trig-label-container, #trig-input-container, .trig-input, #trig-input-label-container {
                 gap: 5px;
             }
             
-            #quadratic-solutions > span, #foiler-solution > span, .point-solution > span, .trig-solution > span {
+            #quadratic-solutions > span, #foiler-solution > span, .point-solution > span {
                 color: #dddddd;
                 background-color: #6d1bb5;
                 border: 1px solid black;
@@ -141,10 +137,6 @@
             
             #quadratic-equation-input input, #foiler-input input, #point-ops-input input, .trig-input input {
                 width: 25px;
-            }
-
-            #trig-input-output-container {
-                align-items: center;
             }
             
             .overline {
@@ -271,6 +263,14 @@
                     <h1>Geometry</h1>
                 </div>
                 <div class="calculator-container">
+                    <h2 style="padding: 20px; font-size: 40px;">Coming soon!</h2>
+                </div>
+                <!-- 
+                    ############                                                ############
+                    ############ Hey! Stay away! This stuff is for next update! ############
+                    ############                                                ############
+                 -->
+                <!-- <div class="calculator-container">
                     <div>
                         <div class="calculator-header-container">
                             <h3>Triangle Trig</h3>
@@ -283,35 +283,21 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="trig-input-output-container">
-                            <div id="trig-input-label-container">
-                                <div id="trig-label-container">
-                                    <span style="text-align: right;">Sides:&nbsp;</span>
-                                    <span>Angles:&nbsp;</span>
-                                </div>
-                                <div id="trig-input-container">
-                                    <div class="trig-input">
-                                        <input id="trig-a" type="number" placeholder="a">
-                                        <input id="trig-b" type="number" placeholder="b">
-                                        <input id="trig-c" type="number" placeholder="c">
-                                    </div>
-                                    <div class="trig-input">
-                                        <input id="trig-A" type="number" placeholder="A">
-                                        <input id="trig-B" type="number" placeholder="B">
-                                        <input id="trig-C" type="number" placeholder="C">
-                                    </div>
-                                </div>
+                        <div id="trig-input-label-container">
+                            <div id="trig-label-container">
+                                <span style="text-align: right;">Sides:&nbsp;</span>
+                                <span>Angles:&nbsp;</span>
                             </div>
-                            <div id="trig-solution-container">
-                                <div class="trig-solution">
-                                    <span id="trig-output-a">N/A</span>
-                                    <span id="trig-output-b">N/A</span>
-                                    <span id="trig-output-c">N/A</span>
+                            <div id="trig-input-container">
+                                <div class="trig-input">
+                                    <input id="trig-a" type="number" placeholder="a">
+                                    <input id="trig-b" type="number" placeholder="b">
+                                    <input id="trig-c" type="number" placeholder="c">
                                 </div>
-                                <div class="trig-solution">
-                                    <span id="trig-output-A">N/A</span>
-                                    <span id="trig-output-B">N/A</span>
-                                    <span id="trig-output-C">N/A</span>
+                                <div class="trig-input">
+                                    <input id="trig-A" type="number" placeholder="A">
+                                    <input id="trig-B" type="number" placeholder="B">
+                                    <input id="trig-C" type="number" placeholder="C">
                                 </div>
                             </div>
                         </div>
@@ -329,7 +315,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <script>
@@ -409,22 +395,22 @@
                                 discrim /= discrimCoef ** 2;
                                 if (discrimCoef < bottom) {
                                     bottom /= discrimCoef;
-                                    document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
-                                    document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
+                                    document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                                    document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
                                 }
                                 else if (discrimCoef > bottom) {
                                     discrimCoef /= bottom;
-                                    document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
-                                    document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
+                                    document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + discrim + "</span>";
+                                    document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + discrim + "</span>";
                                 }
                                 else if (discrimCoef == bottom) {
-                                    document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
-                                    document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
+                                    document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + discrim + "</span>";
+                                    document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + discrim + "</span>";
                                 }
                             }
                             else {
-                                document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
-                                document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
+                                document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                                document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + discrim + "</span> / " + bottom;
                             }
                         }
                     }
@@ -453,10 +439,6 @@
                 var x2 = document.getElementById("points-x2").value;
                 var y2 = document.getElementById("points-y2").value;
                 if (x1.length > 0 && y1.length > 0 && x2.length > 0 && y2.length > 0) {
-                    var x1 = Number(x1);
-                    var y1 = Number(y1);
-                    var x2 = Number(x2);
-                    var y2 = Number(y2);
                     var unRootedLength = (x1 - x2) ** 2 + (y1 - y2) ** 2;
                     var length = unRootedLength ** 0.5;
                     if (length % 1 == 0) { // Length is a whole number

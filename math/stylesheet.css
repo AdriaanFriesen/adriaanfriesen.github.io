@@ -21,7 +21,7 @@ body {
     margin-top: 0;
 }
 
-#header-container > h2 {
+#header-container > h2, #header-container > div > h3 {
     padding-top: 8.5px;
     padding-left: 5px;
 }
