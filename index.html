@@ -12,11 +12,38 @@
             
             #main-title {
                 font-size: 120px;
+                height: 138.4px;
+                /* margin-top: 0; */
             }
             
             a {
                 color: #ce33a5;
                 text-decoration: none;
+                padding: 0;
+                transition: all 1s cubic-bezier(.35,.87,.42,1);
+            }
+            
+            a:hover {
+                font-size: 40px;
+            }
+            
+            .grow-header {
+                display: inline-flex;
+                align-items: center;
+                /* height: 138.4px;
+                float: inline-start;
+                transition: all 1s cubic-bezier(.35,.87,.42,1); */
+            }
+            
+            /* .grow-header:hover {
+                font-size: 240px;
+            } */
+            
+            .grow-link {
+                display: flex;
+                align-items: center;
+                height: 60px;
+                transition: all 0.25s cubic-bezier(.35,.87,.42,1);
             }
 
             .description {
@@ -25,19 +52,13 @@
         </style>
     </head>
     <body>
-        <h1 id="main-title">adriaan friesen</h1>
-        <a href="./math">/math<span class="description"> - calculator for various things including quadratic equations, trigonometry, etc</span></a>
-        <br>
-        <br>
-        <a href="./les-catacombs">french 2 géoculture project</a>
-        <br>
-        <br>
-        <a href="./mandelbrot-set">web mandelbrot set renderer<span class="description"> (incomplete and buggy)</a></span>
-        <br>
-        <br>
-        <a href="./spin-cube">3d spinning cube<span class="description"> (pure css)</span></a>
-        <br>
-        <br>
-        <a href="./python-intro">python introduction made in web design class</a>
+        <h1 id="main-title">
+            <div class="grow-header">a</div><div class="grow-header">d</div><div class="grow-header">r</div><div class="grow-header">i</div><div class="grow-header">a</div><div class="grow-header">a</div><div class="grow-header">n</div><div class="grow-header">&nbsp;</div><div class="grow-header">f</div><div class="grow-header">r</div><div class="grow-header">i</div><div class="grow-header">e</div><div class="grow-header">s</div><div class="grow-header">e</div><div class="grow-header">n</div>
+        </h1>
+        <div class="grow-link"><a href="./math">/math<span class="description"> - calculator for various things including quadratic equations, trigonometry, etc</span></a></div>
+        <div class="grow-link"><a href="./les-catacombs">french 2 géoculture project</a></div>
+        <div class="grow-link"><a href="./mandelbrot-set">web mandelbrot set renderer<span class="description"> (incomplete and buggy)</a></span></div>
+        <div class="grow-link"><a href="./spin-cube">3d spinning cube<span class="description"> (pure css)</span></a></div>
+        <div class="grow-link"><a href="./python-intro">python introduction made in web design class</a></div>
     </body>
 </html>
