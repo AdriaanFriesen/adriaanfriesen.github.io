@@ -9,27 +9,44 @@
                 font-weight: 600;
                 src: local("Myriad Pro"), url("../../resources/fonts/MYRIADPRO-SEMIBOLD.woff") format("woff");
             }
+            
             body {
                 background-color: #454046;
                 color: white;
                 font-family: "Myriad Pro", sans-serif;
             }
-            #first-header {
+            
+            #header-container {
+                display: flex;
+                flex-direction: row;
+            }
+            
+            #header-container > h1 {
                 font-size: 60px;
                 margin-top: 0;
             }
+            
+            #header-container > h2 {
+                padding-top: 8.5px;
+                padding-left: 5px;
+            }
+            
             .border-1 {
                 border: 2px solid black;
             }
+            
             .color-layer-1 {
                 background-color: #611379;
             }
+            
             .color-layer-2 {
                 background-color: #6b387a;
             }
+            
             .spaced {
                 padding: 10px;
             }
+            
             a:link, a:visited {
                 color: #cda8eb;
                 background-color: #5f3e85;
@@ -41,7 +58,10 @@
         </style>
     </head>
     <body>
-        <h1 id="first-header">Old Versions</h1>
+        <div id="header-container">
+            <h1>Old Versions</h1>
+            <h2><a href="../">../</a></h2>
+        </div>
         <div class="color-layer-1 border-1 spaced">
             <div class="color-layer-2 border-1">
                 <ul>
