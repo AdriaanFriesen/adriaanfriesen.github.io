@@ -19,8 +19,8 @@ function doQuadFormula() {
     }
     if (a.length) {
         var a = Number(a);
-        var a = Number(a);
-        var a = Number(a);
+        var b = Number(b);
+        var c = Number(c);
         var discrim = b ** 2 - 4 * a * c;
         if (document.getElementById("quad-approx").checked) { // User has requested approximate values
             if (discrim >= 0) { // Real solutions
@@ -35,6 +35,8 @@ function doQuadFormula() {
                 document.getElementById("sol-1").innerHTML = Number(solReal.toFixed(approxDigits)) + " + " + Number(solImag.toFixed(approxDigits)) + "<i>i</i>";
                 document.getElementById("sol-2").innerHTML = Number(solReal.toFixed(approxDigits)) + " - " + Number(solImag.toFixed(approxDigits)) + "<i>i</i>";
             }
+            document.getElementById("vertex-x").innerHTML = Number(((-1 * b) / (2 * a)).toFixed(approxDigits));
+            document.getElementById("vertex-y").innerHTML = Number((a * ((-1 * b) / (2 * a)) ** 2 + b * ((-1 * b) / (2 * a)) + c).toFixed(approxDigits));
         }
         else { // Give exact square roots
             if (discrim >= 0 && discrim ** 0.5 % 1 == 0) { // Real perfect square solutions
@@ -126,6 +128,8 @@ function doQuadFormula() {
                     document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
                 }
             }
+            document.getElementById("vertex-x").innerHTML = ((-1 * b) / (2 * a));
+            document.getElementById("vertex-y").innerHTML = (a * ((-1 * b) / (2 * a)) ** 2 + b * ((-1 * b) / (2 * a)) + c);
         }
     }
 }
@@ -136,7 +140,7 @@ document.getElementById("foiler-c").addEventListener("keyup", doFOIL);
 document.getElementById("foiler-d").addEventListener("keyup", doFOIL);
 
 function doFOIL() {
-    document.getElementById("foiled-poly").innerHTML = (Number(document.getElementById("foiler-a").value) * Number(document.getElementById("foiler-c").value)) + "x<sup>2</sup> + " + ((Number(document.getElementById("foiler-a").value) + Number(document.getElementById("foiler-d").value)) + (Number(document.getElementById("foiler-b").value) + Number(document.getElementById("foiler-c").value))) + "x + " + (Number(document.getElementById("foiler-b").value) * Number(document.getElementById("foiler-d").value));
+    document.getElementById("foiled-poly").innerHTML = (Number(document.getElementById("foiler-a").value) * Number(document.getElementById("foiler-c").value)) + "x<sup>2</sup> + " + ((Number(document.getElementById("foiler-b").value) + Number(document.getElementById("foiler-d").value))) + "x + " + (Number(document.getElementById("foiler-b").value) * Number(document.getElementById("foiler-d").value));
 }
 
 document.getElementById("points-x1").addEventListener("keyup", doPointOps);
