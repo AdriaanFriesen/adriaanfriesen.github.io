@@ -2,7 +2,7 @@
     font-family: "Myriad Pro";
     font-style: normal;
     font-weight: 600;
-    src: local("Myriad Pro"), url("../resources/fonts/MYRIADPRO-SEMIBOLD.woff") format("woff");
+    src: local("Myriad Pro"), url("../../../resources/fonts/MYRIADPRO-SEMIBOLD.woff") format("woff");
 }
 
 body {
