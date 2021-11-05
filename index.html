@@ -7,37 +7,38 @@
                 background: #111111;
                 font-family: helvetica, sans-serif;
                 color: orange;
-                font-size: 24px
             }
             
             #main-title {
                 font-size: 120px;
                 height: 138.4px;
-                /* margin-top: 0; */
             }
             
             a {
                 color: #ce33a5;
                 text-decoration: none;
+                font-size: 24px;
                 padding: 0;
                 transition: all 1s cubic-bezier(.35,.87,.42,1);
             }
             
             a:hover {
+                /* transform: scale(calc(5 / 3)); */
                 font-size: 40px;
             }
             
             .grow-header {
                 display: inline-flex;
                 align-items: center;
-                /* height: 138.4px;
+                height: 138.4px;
                 float: inline-start;
-                transition: all 1s cubic-bezier(.35,.87,.42,1); */
+                transition: all 1s cubic-bezier(.35,.87,.42,1);
             }
             
-            /* .grow-header:hover {
-                font-size: 240px;
-            } */
+            .grow-header:hover {
+                transform: scale(2);
+                text-shadow: 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white;
+            }
             
             .grow-link {
                 display: flex;
