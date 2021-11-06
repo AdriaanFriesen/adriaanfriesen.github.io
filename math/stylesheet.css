@@ -169,12 +169,12 @@ input {
     margin-bottom: 4px;
 }
 
-.approx-box {
+.right-flex {
     margin-left: auto;
     margin-right: 0;
 }
 
-.approx-box > label {
+.approx-box label {
     align-items: center;
 }
 
