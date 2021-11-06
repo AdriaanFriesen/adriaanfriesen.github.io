@@ -1,14 +1,18 @@
-document.getElementById("quad-a").addEventListener("keyup", doQuadFormula);
-document.getElementById("quad-b").addEventListener("keyup", doQuadFormula);
-document.getElementById("quad-c").addEventListener("keyup", doQuadFormula);
-document.getElementById("quad-approx").addEventListener("change", doQuadFormula);
-document.getElementById("quad-approx-digits").addEventListener("keyup", doQuadFormula);
+function id(x) {
+    return document.getElementById(x);
+}
+
+id("quad-a").addEventListener("keyup", doQuadFormula);
+id("quad-b").addEventListener("keyup", doQuadFormula);
+id("quad-c").addEventListener("keyup", doQuadFormula);
+id("quad-approx").addEventListener("change", doQuadFormula);
+id("quad-approx-digits").addEventListener("keyup", doQuadFormula);
 
 function doQuadFormula() {
-    var a = document.getElementById("quad-a").value;
-    var b = document.getElementById("quad-b").value;
-    var c = document.getElementById("quad-c").value;
-    var approxDigits = document.getElementById("quad-approx-digits").value;
+    var a = id("quad-a").value;
+    var b = id("quad-b").value;
+    var c = id("quad-c").value;
+    var approxDigits = id("quad-approx-digits").value;
 
     if (!Number(approxDigits)) {
         approxDigits = 2;
@@ -22,140 +26,265 @@ function doQuadFormula() {
         var b = Number(b);
         var c = Number(c);
         var discrim = b ** 2 - 4 * a * c;
-        if (document.getElementById("quad-approx").checked) { // User has requested approximate values
+        if (id("quad-approx").checked) { // User has requested approximate values
             if (discrim >= 0) { // Real solutions
-                var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
-                var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
-                document.getElementById("sol-1").innerHTML = Number(sol1.toFixed(approxDigits));
-                document.getElementById("sol-2").innerHTML = Number(sol2.toFixed(approxDigits));
+                var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / (2 * a);
+                var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / (2 * a);
+                id("sol-1").innerHTML = Number(sol1.toFixed(approxDigits));
+                id("sol-2").innerHTML = Number(sol2.toFixed(approxDigits));
             }
             else if (discrim < 0) { // Complex solutions
-                var solReal = (-1 * b) / ( 2 * a);
-                var solImag = ((-1 * (b ** 2 - 4 * a * c)) ** 0.5) / ( 2 * a);
-                document.getElementById("sol-1").innerHTML = Number(solReal.toFixed(approxDigits)) + " + " + Number(solImag.toFixed(approxDigits)) + "<i>i</i>";
-                document.getElementById("sol-2").innerHTML = Number(solReal.toFixed(approxDigits)) + " - " + Number(solImag.toFixed(approxDigits)) + "<i>i</i>";
+                var solReal = (-1 * b) / (2 * a);
+                var solImag = ((-1 * (b ** 2 - 4 * a * c)) ** 0.5) / (2 * a);
+                id("sol-1").innerHTML = Number(solReal.toFixed(approxDigits)) + " + " + Number(solImag.toFixed(approxDigits)) + "<i>i</i>";
+                id("sol-2").innerHTML = Number(solReal.toFixed(approxDigits)) + " - " + Number(solImag.toFixed(approxDigits)) + "<i>i</i>";
             }
-            document.getElementById("vertex-x").innerHTML = Number(((-1 * b) / (2 * a)).toFixed(approxDigits));
-            document.getElementById("vertex-y").innerHTML = Number((a * ((-1 * b) / (2 * a)) ** 2 + b * ((-1 * b) / (2 * a)) + c).toFixed(approxDigits));
+            id("vertex-x").innerHTML = Number(((-1 * b) / (2 * a)).toFixed(approxDigits));
+            id("vertex-y").innerHTML = Number((a * ((-1 * b) / (2 * a)) ** 2 + b * ((-1 * b) / (2 * a)) + c).toFixed(approxDigits));
         }
         else { // Give exact square roots
             if (discrim >= 0 && discrim ** 0.5 % 1 == 0) { // Real perfect square solutions
-                var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
-                var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / ( 2 * a);
-                document.getElementById("sol-1").innerHTML = sol1;
-                document.getElementById("sol-2").innerHTML = sol2;
+                if (decimalReprisentable((2 * a))) {
+                    var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / (2 * a);
+                    var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / (2 * a);
+                }
+                else if (parseInt((a)) != a || parseInt(b) != b || parseInt(c) != c) {
+                    var sol1 = (-1 * b + ((b ** 2 - 4 * a * c) ** 0.5)) / (2 * a);
+                    var sol2 = (-1 * b - ((b ** 2 - 4 * a * c) ** 0.5)) / (2 * a);
+                }
+                else {
+                    var wholeDiscrim = (discrim ** 0.5);
+                    if (((-1 * b) + wholeDiscrim) == 0) {
+                        sol1 = 0;
+                    }
+                    else {
+                        var fracP1 = (((-1 * b) + wholeDiscrim) / GCF((Math.abs(((-1 * b) + wholeDiscrim))), Math.abs((2 * a))));
+                        var fracP2 = ((2 * a) / GCF(Math.abs(((-1 * b) + wholeDiscrim)), Math.abs((2 * a))));
+                        if (fracP1 == fracP2) {
+                            var sol1 = 1;
+                        }
+                        else if (fracP1 == -1 && fracP2 == 1) {
+                            var sol1 = -1;
+                        }
+                        else {
+                            var sol1 = fracP1 + " / " + fracP2;
+                        }
+                    }
+                    if (((-1 * b) - wholeDiscrim) == 0) {
+                        sol2 = 0;
+                    }
+                    else {
+                        var fracP1 = (((-1 * b) - wholeDiscrim) / GCF((Math.abs(((-1 * b) - wholeDiscrim))), Math.abs((2 * a))));
+                        var fracP2 = ((2 * a) / GCF(Math.abs(((-1 * b) - wholeDiscrim)), Math.abs((2 * a))));
+                        if (fracP1 == fracP2) {
+                            var sol2 = 1;
+                        }
+                        else if (fracP1 == -1 && fracP2 == 1) {
+                            var sol2 = -1;
+                        }
+                        else {
+                            var sol2 = fracP1 + " / " + fracP2;
+                        }
+                    }
+                }
+                id("sol-1").innerHTML = sol1;
+                id("sol-2").innerHTML = sol2;
             }
             else if (discrim < 0 && (-1 * discrim) ** 0.5 % 1 == 0) { // Complex perfect square solutions
-                var solReal = (-1 * b)  / ( 2 * a);
                 var solImag = ((-1 * discrim) ** 0.5) / (2 * a);
-                document.getElementById("sol-1").innerHTML = solReal + " + " + solImag + "<i>i</i>";
-                document.getElementById("sol-2").innerHTML = solReal + " - " + solImag + "<i>i</i>";
+                if (decimalReprisentable((2 * a))) {
+                    var solReal = (-1 * b)  / (2 * a);
+                }
+                else if (parseInt((a)) != a || parseInt(b) != b || parseInt(c) != c) {
+                    var solReal = (-1 * b)  / (2 * a);
+                }
+                else {
+                    var fracP1 = ((-1 * b) / GCF(Math.abs((-1 * b)), Math.abs((2 * a))));
+                    var fracP2 = ((2 * a) / GCF(Math.abs((-1 * b)), Math.abs((2 * a))));
+                    if (fracP1 == fracP2) {
+                        var solReal = 1;
+                    }
+                    else if (fracP1 == -1 && fracP2 == 1) {
+                        var solReal = -1;
+                    }
+                    else {
+                        var solReal = fracP1 + " / " + fracP2;
+                    }
+                }
+                id("sol-1").innerHTML = solReal + " + " + solImag + "<i>i</i>";
+                id("sol-2").innerHTML = solReal + " - " + solImag + "<i>i</i>";
             }
             else if (discrim >= 0) { // Real solutions
-                var sol = (-1 * b) / ( 2 * a);
+                if (decimalReprisentable((2 * a))) {
+                    var sol = (-1 * b) / (2 * a);
+                }
+                else if (parseInt((a)) != a || parseInt(b) != b || parseInt(c) != c) {
+                    var sol = (-1 * b) / (2 * a);
+                }
+                else {
+                    var fracP1 = ((-1 * b) / GCF(Math.abs((-1 * b)), Math.abs((2 * a))));
+                    var fracP2 = ((2 * a) / GCF(Math.abs((-1 * b)), Math.abs((2 * a))));
+                    if (fracP1 == fracP2) {
+                        var sol = 1;
+                    }
+                    else if (fracP1 == -1 && fracP2 == 1) {
+                        var sol = -1;
+                    }
+                    else {
+                        var sol = fracP1 + " / " + fracP2;
+                    }
+                }
                 var bottom = 2 * a;
-                if (SQGPSF(discrim) !== 1) {
+                if (SQGPSF(discrim) > 1) {
+                    console.log(SQGPSF(discrim))
                     var discrimCoef = SQGPSF(discrim);
                     discrim /= discrimCoef ** 2;
                     if (discrimCoef < bottom) {
                         bottom /= discrimCoef;
-                        if (document.getElementById("quad-approx").checked) {
-                            document.getElementById("sol-1").innerHTML = Number(sol.toFixed(approxDigits)) + " + " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
-                            document.getElementById("sol-2").innerHTML = Number(sol.toFixed(approxDigits)) + " - " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                        if (id("quad-approx").checked) {
+                            id("sol-1").innerHTML = Number(sol.toFixed(approxDigits)) + " + " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                            id("sol-2").innerHTML = Number(sol.toFixed(approxDigits)) + " - " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
                         }
                         else {
-                            document.getElementById("sol-1").innerHTML = sol + " + " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
-                            document.getElementById("sol-2").innerHTML = sol + " - " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                            id("sol-1").innerHTML = sol + " + " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                            id("sol-2").innerHTML = sol + " - " + "√<span class=\"overline\">" + discrim + "</span> / " + bottom;
                         }
                     }
                     else if (discrimCoef > bottom) {
                         discrimCoef /= bottom;
-                        if (document.getElementById("quad-approx").checked) {
-                            document.getElementById("sol-1").innerHTML = Number(sol.toFixed(approxDigits)) + " + " + "√<span class=\"overline\">" + discrim + "</span>";
-                            document.getElementById("sol-2").innerHTML = Number(sol.toFixed(approxDigits)) + " - " + "√<span class=\"overline\">" + discrim + "</span>";
+                        if (id("quad-approx").checked) {
+                            id("sol-1").innerHTML = Number(sol.toFixed(approxDigits)) + " + " + "√<span class=\"overline\">" + discrim + "</span>";
+                            id("sol-2").innerHTML = Number(sol.toFixed(approxDigits)) + " - " + "√<span class=\"overline\">" + discrim + "</span>";
                         }
                         else {
-                            document.getElementById("sol-1").innerHTML = sol + " + " + "√<span class=\"overline\">" + discrim + "</span>";
-                            document.getElementById("sol-2").innerHTML = sol + " - " + "√<span class=\"overline\">" + discrim + "</span>";
+                            id("sol-1").innerHTML = sol + " + " + "√<span class=\"overline\">" + discrim + "</span>";
+                            id("sol-2").innerHTML = sol + " - " + "√<span class=\"overline\">" + discrim + "</span>";
                         }
                     }
                     else if (discrimCoef == bottom) {
-                        if (document.getElementById("quad-approx").checked) {
-                            document.getElementById("sol-1").innerHTML = Number(sol.toFixed(approxDigits)) + " + √<span class=\"overline\">" + discrim + "</span>";
-                            document.getElementById("sol-2").innerHTML = Number(sol.toFixed(approxDigits)) + " - √<span class=\"overline\">" + discrim + "</span>";
+                        if (id("quad-approx").checked) {
+                            id("sol-1").innerHTML = Number(sol.toFixed(approxDigits)) + " + √<span class=\"overline\">" + discrim + "</span>";
+                            id("sol-2").innerHTML = Number(sol.toFixed(approxDigits)) + " - √<span class=\"overline\">" + discrim + "</span>";
                         }
                         else {
-                            document.getElementById("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span>";
-                            document.getElementById("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span>";
+                            id("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span>";
+                            id("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span>";
                         }
                     }
                 }
                 else {
-                    if (document.getElementById("quad-approx").checked) {
-                        document.getElementById("sol-1").innerHTML = Number(sol.toFixed(approxDigits)) + " + √<span class=\"overline\">" + discrim + "</span> / " + bottom;
-                        document.getElementById("sol-2").innerHTML = Number(sol.toFixed(approxDigits)) + " - √<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                    if (id("quad-approx").checked) {
+                        id("sol-1").innerHTML = Number(sol.toFixed(approxDigits)) + " + √<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                        id("sol-2").innerHTML = Number(sol.toFixed(approxDigits)) + " - √<span class=\"overline\">" + discrim + "</span> / " + bottom;
 
                     }
                     else {
-                        document.getElementById("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span> / " + bottom;
-                        document.getElementById("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                        id("sol-1").innerHTML = sol + " + √<span class=\"overline\">" + discrim + "</span> / " + bottom;
+                        id("sol-2").innerHTML = sol + " - √<span class=\"overline\">" + discrim + "</span> / " + bottom;
                     }
                 }
             }
             else if (discrim < 0) { // Complex solutions
-                var sol = (-1 * b) / ( 2 * a);
+                if (decimalReprisentable((2 * a))) {
+                    var sol = (-1 * b) / (2 * a);
+                }
+                else if (parseInt((a)) != a || parseInt(b) != b || parseInt(c) != c) {
+                    var sol = (-1 * b) / (2 * a);
+                }
+                else {
+                    var fracP1 = ((-1 * b) / GCF(Math.abs((-1 * b)), Math.abs((2 * a))));
+                    var fracP2 = ((2 * a) / GCF(Math.abs((-1 * b)), Math.abs((2 * a))));
+                    if (fracP1 == fracP2) {
+                        var sol = 1;
+                    }
+                    else if (fracP1 == -1 && fracP2 == 1) {
+                        var sol = -1;
+                    }
+                    else {
+                        var sol = fracP1 + " / " + fracP2;
+                    }
+                }
                 var bottom = 2 * a;
                 if (SQGPSF(discrim) !== 1) {
                     var discrimCoef = SQGPSF(-1 * discrim);
                     discrim /= discrimCoef ** 2;
                     if (discrimCoef < bottom) {
                         bottom /= discrimCoef;
-                        document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
-                        document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
+                        id("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
+                        id("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
                     }
                     else if (discrimCoef > bottom) {
                         discrimCoef /= bottom;
-                        document.getElementById("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
-                        document.getElementById("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
+                        id("sol-1").innerHTML = sol + " + " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
+                        id("sol-2").innerHTML = sol + " - " + "<i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
                     }
                     else if (discrimCoef == bottom) {
-                        document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
-                        document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
+                        id("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
+                        id("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span>";
                     }
                 }
                 else {
-                    document.getElementById("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
-                    document.getElementById("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
+                    id("sol-1").innerHTML = sol + " + <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
+                    id("sol-2").innerHTML = sol + " - <i>i</i>√<span class=\"overline\">" + -1 * discrim + "</span> / " + bottom;
                 }
             }
-            document.getElementById("vertex-x").innerHTML = ((-1 * b) / (2 * a));
-            document.getElementById("vertex-y").innerHTML = (a * ((-1 * b) / (2 * a)) ** 2 + b * ((-1 * b) / (2 * a)) + c);
+            if (decimalReprisentable((2 * a))) {
+                vertexX = ((-1 * b) / (2 * a));
+                vertexY = (a * ((-1 * b) / (2 * a)) ** 2 + b * ((-1 * b) / (2 * a)) + c);
+            }
+            else {
+                var fracP1 = ((-1 * b) / GCF(Math.abs((-1 * b)), Math.abs((2 * a))));
+                var fracP2 = ((2 * a) / GCF(Math.abs((-1 * b)), Math.abs((2 * a))));
+                if (fracP1 == fracP2) {
+                    var vertexX = 1;
+                }
+                else if (fracP1 == -1 && fracP2 == 1) {
+                    var vertexX = -1;
+                }
+                else {
+                    var vertexX = fracP1 + " / " + fracP2;
+                }
+
+                fracP1 = (a * ((-1 * b) / (2 * a)) ** 2 + b * ((-1 * b))) / (GCF(Math.abs((a * ((-1 * b) / (2 * a)) ** 2 + b * (-1 * b))), Math.abs(((2 * a) + c))));
+                fracP2 = ((2 * a) + c) / (GCF(Math.abs((a * ((-1 * b) / (2 * a)) ** 2 + b * (-1 * b))), Math.abs(((2 * a) + c))));
+                if (fracP1 == fracP2) {
+                    var vertexY = 1;
+                }
+                else if (fracP1 == -1 && fracP2 == 1) {
+                    var vertexY = -1;
+                }
+                else {
+                    var vertexY = fracP1 + " / " + fracP2;
+                }
+            }
+            id("vertex-x").innerHTML = vertexX;
+            id("vertex-y").innerHTML = vertexY;
         }
     }
 }
 
-document.getElementById("foiler-a").addEventListener("keyup", doFOIL);
-document.getElementById("foiler-b").addEventListener("keyup", doFOIL);
-document.getElementById("foiler-c").addEventListener("keyup", doFOIL);
-document.getElementById("foiler-d").addEventListener("keyup", doFOIL);
+id("foiler-a").addEventListener("keyup", doFOIL);
+id("foiler-b").addEventListener("keyup", doFOIL);
+id("foiler-c").addEventListener("keyup", doFOIL);
+id("foiler-d").addEventListener("keyup", doFOIL);
 
 function doFOIL() {
-    document.getElementById("foiled-poly").innerHTML = (Number(document.getElementById("foiler-a").value) * Number(document.getElementById("foiler-c").value)) + "x<sup>2</sup> + " + ((Number(document.getElementById("foiler-b").value) + Number(document.getElementById("foiler-d").value))) + "x + " + (Number(document.getElementById("foiler-b").value) * Number(document.getElementById("foiler-d").value));
+    id("foiled-poly").innerHTML = (Number(id("foiler-a").value) * Number(id("foiler-c").value)) + "x<sup>2</sup> + " + ((Number(id("foiler-b").value) + Number(id("foiler-d").value))) + "x + " + (Number(id("foiler-b").value) * Number(id("foiler-d").value));
 }
 
-document.getElementById("points-x1").addEventListener("keyup", doPointOps);
-document.getElementById("points-y1").addEventListener("keyup", doPointOps);
-document.getElementById("points-x2").addEventListener("keyup", doPointOps);
-document.getElementById("points-y2").addEventListener("keyup", doPointOps);
-document.getElementById("point-approx").addEventListener("change", doPointOps);
-document.getElementById("point-approx-digits").addEventListener("keyup", doPointOps);
+id("points-x1").addEventListener("keyup", doPointOps);
+id("points-y1").addEventListener("keyup", doPointOps);
+id("points-x2").addEventListener("keyup", doPointOps);
+id("points-y2").addEventListener("keyup", doPointOps);
+id("point-approx").addEventListener("change", doPointOps);
+id("point-approx-digits").addEventListener("keyup", doPointOps);
 
 function doPointOps() {
-    var x1 = document.getElementById("points-x1").value;
-    var y1 = document.getElementById("points-y1").value;
-    var x2 = document.getElementById("points-x2").value;
-    var y2 = document.getElementById("points-y2").value;
-    var approxDigits = document.getElementById("point-approx-digits").value;
+    var x1 = id("points-x1").value;
+    var y1 = id("points-y1").value;
+    var x2 = id("points-x2").value;
+    var y2 = id("points-y2").value;
+    var approxDigits = id("point-approx-digits").value;
 
     if (!Number(approxDigits)) {
         approxDigits = 2;
@@ -172,49 +301,49 @@ function doPointOps() {
         var unRootedLength = (x1 - x2) ** 2 + (y1 - y2) ** 2;
         var length = unRootedLength ** 0.5;
         if (length % 1 == 0) { // Length is a whole number
-                document.getElementById("length").innerHTML = length;
+                id("length").innerHTML = length;
         }
 
         else { // Length is an uneven square root
-            if (document.getElementById("point-approx").checked) { // User has requested approximate values
-                document.getElementById("length").innerHTML = Number(length.toFixed(approxDigits));
+            if (id("point-approx").checked) { // User has requested approximate values
+                id("length").innerHTML = Number(length.toFixed(approxDigits));
 
             }
             else { // Give exact square roots
                 if (SQGPSF(unRootedLength) !== 1) {
                     lengthCoef = SQGPSF(unRootedLength);
                     unRootedLength /= lengthCoef ** 2;
-                    document.getElementById("length").innerHTML = lengthCoef + "√<span class=\"overline\">" + unRootedLength + "</span>";
+                    id("length").innerHTML = lengthCoef + "√<span class=\"overline\">" + unRootedLength + "</span>";
                 }
                 else {
-                    document.getElementById("length").innerHTML = "√<span class=\"overline\">" + unRootedLength + "</span>";
+                    id("length").innerHTML = "√<span class=\"overline\">" + unRootedLength + "</span>";
                 }
             }
         }
         var midpointX = (x1 + x2) / 2;
         var midpointY = (y1 + y2) / 2;
-        document.getElementById("midpoint-x").innerHTML = midpointX;
-        document.getElementById("midpoint-y").innerHTML = midpointY;
+        id("midpoint-x").innerHTML = midpointX;
+        id("midpoint-y").innerHTML = midpointY;
     }
 }
 
-document.getElementById("trig-a").addEventListener("keyup", doTrig);
-document.getElementById("trig-b").addEventListener("keyup", doTrig);
-document.getElementById("trig-c").addEventListener("keyup", doTrig);
-document.getElementById("trig-A").addEventListener("keyup", doTrig);
-document.getElementById("trig-B").addEventListener("keyup", doTrig);
-document.getElementById("trig-C").addEventListener("keyup", doTrig);
-document.getElementById("trig-approx").addEventListener("change", doTrig);
-document.getElementById("trig-approx-digits").addEventListener("keyup", doTrig);
+id("trig-a").addEventListener("keyup", doTrig);
+id("trig-b").addEventListener("keyup", doTrig);
+id("trig-c").addEventListener("keyup", doTrig);
+id("trig-A").addEventListener("keyup", doTrig);
+id("trig-B").addEventListener("keyup", doTrig);
+id("trig-C").addEventListener("keyup", doTrig);
+id("trig-approx").addEventListener("change", doTrig);
+id("trig-approx-digits").addEventListener("keyup", doTrig);
 
 function doTrig() {
-    var a = document.getElementById("trig-a").value;
-    var b = document.getElementById("trig-b").value;
-    var c = document.getElementById("trig-c").value;
-    var A = document.getElementById("trig-A").value;
-    var B = document.getElementById("trig-B").value;
-    var C = document.getElementById("trig-C").value;
-    var approxDigits = document.getElementById("trig-approx-digits").value;
+    var a = id("trig-a").value;
+    var b = id("trig-b").value;
+    var c = id("trig-c").value;
+    var A = id("trig-A").value;
+    var B = id("trig-B").value;
+    var C = id("trig-C").value;
+    var approxDigits = id("trig-approx-digits").value;
 
     if (!Number(approxDigits) && approxDigits !== "0") {
         approxDigits = 2;
@@ -241,8 +370,8 @@ function doTrig() {
     C = Number(C);
 
     if (angles + sides == 3) {
-        document.getElementById("trig-sol").style.display = "flex";
-        document.getElementById("trig-no-sol").style.display = "none";
+        id("trig-sol").style.display = "flex";
+        id("trig-no-sol").style.display = "none";
 
         if (sides == 3 && angles == 3) {}
 
@@ -294,42 +423,42 @@ function doTrig() {
             }
         }
         else {
-            document.getElementById("trig-no-sol").innerHTML = "Unsolvable (ASS) triangle";
-            document.getElementById("trig-no-sol").style.display = "unset";
-            document.getElementById("trig-sol").style.display = "none";
+            id("trig-no-sol").innerHTML = "Unsolvable (ASS) triangle";
+            id("trig-no-sol").style.display = "unset";
+            id("trig-sol").style.display = "none";
         }
-        document.getElementById("trig-output-b").innerHTML = Number(b.toFixed(approxDigits));
-        document.getElementById("trig-output-c").innerHTML = Number(c.toFixed(approxDigits));
-        document.getElementById("trig-output-a").innerHTML = Number(a.toFixed(approxDigits));
-        document.getElementById("trig-output-A").innerHTML = Number(A.toFixed(approxDigits)) + "°";
-        document.getElementById("trig-output-B").innerHTML = Number(B.toFixed(approxDigits)) + "°";
-        document.getElementById("trig-output-C").innerHTML = Number(C.toFixed(approxDigits)) + "°";
+        id("trig-output-b").innerHTML = Number(b.toFixed(approxDigits));
+        id("trig-output-c").innerHTML = Number(c.toFixed(approxDigits));
+        id("trig-output-a").innerHTML = Number(a.toFixed(approxDigits));
+        id("trig-output-A").innerHTML = Number(A.toFixed(approxDigits)) + "°";
+        id("trig-output-B").innerHTML = Number(B.toFixed(approxDigits)) + "°";
+        id("trig-output-C").innerHTML = Number(C.toFixed(approxDigits)) + "°";
     }
     else {
         if (angles + sides > 3) {
-            document.getElementById("trig-no-sol").innerHTML="Too many inputs";
+            id("trig-no-sol").innerHTML="Too many inputs";
         }
         else {
-            document.getElementById("trig-no-sol").innerHTML="Not enough inputs";
+            id("trig-no-sol").innerHTML="Not enough inputs";
         }
-        document.getElementById("trig-no-sol").style.display = "unset";
-        document.getElementById("trig-sol").style.display = "none";
+        id("trig-no-sol").style.display = "unset";
+        id("trig-sol").style.display = "none";
     }
 }
 
-document.getElementById("circle-radius").addEventListener("keyup", doCircle);
-document.getElementById("circle-diameter").addEventListener("keyup", doCircle);
-document.getElementById("circle-circumference").addEventListener("keyup", doCircle);
-document.getElementById("circle-area").addEventListener("keyup", doCircle);
-document.getElementById("circle-approx").addEventListener("change", doCircle);
-document.getElementById("circle-approx-digits").addEventListener("keyup", doCircle);
+id("circle-radius").addEventListener("keyup", doCircle);
+id("circle-diameter").addEventListener("keyup", doCircle);
+id("circle-circumference").addEventListener("keyup", doCircle);
+id("circle-area").addEventListener("keyup", doCircle);
+id("circle-approx").addEventListener("change", doCircle);
+id("circle-approx-digits").addEventListener("keyup", doCircle);
 
 function doCircle() {
-    var radius = document.getElementById("circle-radius").value;
-    var diameter = document.getElementById("circle-diameter").value;
-    var circumference = document.getElementById("circle-circumference").value;
-    var area = document.getElementById("circle-area").value;
-    var approxDigits = document.getElementById("circle-approx-digits").value;
+    var radius = id("circle-radius").value;
+    var diameter = id("circle-diameter").value;
+    var circumference = id("circle-circumference").value;
+    var area = id("circle-area").value;
+    var approxDigits = id("circle-approx-digits").value;
 
     if (!Number(approxDigits)) {
         approxDigits = 2;
@@ -350,7 +479,7 @@ function doCircle() {
     area = Number(area);
 
     if (inputs == 1) {
-        if (document.getElementById("circle-approx").checked) {
+        if (id("circle-approx").checked) {
             if (radius) {
                 diameter = 2 * radius
                 circumference = Math.PI * diameter;
@@ -398,31 +527,73 @@ function doCircle() {
                 area = area;
             }
         }
-        document.getElementById("circle-sol").style.display = "flex";
-        document.getElementById("circle-no-sol").style.display = "none";
+        id("circle-sol").style.display = "flex";
+        id("circle-no-sol").style.display = "none";
         
-        document.getElementById("circle-output-radius").innerHTML = radius;
-        document.getElementById("circle-output-diameter").innerHTML = diameter;
-        document.getElementById("circle-output-circumference").innerHTML = circumference;
-        document.getElementById("circle-output-area").innerHTML = area;
+        id("circle-output-radius").innerHTML = radius;
+        id("circle-output-diameter").innerHTML = diameter;
+        id("circle-output-circumference").innerHTML = circumference;
+        id("circle-output-area").innerHTML = area;
     }
     else {
         if (inputs > 1) {
-            document.getElementById("circle-no-sol").innerHTML = "Too many inputs"
+            id("circle-no-sol").innerHTML = "Too many inputs"
         }
         else {
-            document.getElementById("circle-no-sol").innerHTML = "Not enough inputs"
+            id("circle-no-sol").innerHTML = "Not enough inputs"
         }
-        document.getElementById("circle-no-sol").style.display = "unset";
-        document.getElementById("circle-sol").style.display = "none";
+        id("circle-no-sol").style.display = "unset";
+        id("circle-sol").style.display = "none";
     }
 }
 
 function SQGPSF(n) {
     // Return the square root of the greatest perfect sqaure factor of n
-    for (var i = n - 1; i > 0; i--) {
+    for (let i = n - 1; i > 0; i--) {
         if (n % i == 0 && i ** 0.5 % 1 == 0) {
             return i ** 0.5;
+        }
+    }
+}
+
+function factor(n) {
+    let factorList = [];
+    for (let i = n; i > 0; i--) {
+        if (n % i == 0) {
+            factorList.push(i);
+        }
+    }
+    return factorList;
+}
+
+function decimalReprisentable(x) {
+    if (parseInt(x) != x) {
+        return false;
+    }
+    let factorList = factor(x);
+    factorList.splice(0, 1);
+    let representable = true;
+    if (factorList.length == 1 && ![2, 4, 5].includes(x)) {
+        representable = false
+    }
+    else {
+        for (f of factorList) {
+            if (![2, 4, 5].includes(f)) {
+                if (!decimalReprisentable(f)) {
+                    representable = false
+                }
+            }
+        }
+    }
+    return representable;
+}
+
+function GCF(x, y) {
+    let xFactors = factor(x);
+    let yFactors = factor(y);
+    for (xFactor of xFactors) {
+        if (yFactors.includes(xFactor)) {
+            return xFactor;
         }
     }
 }
