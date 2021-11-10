@@ -10,7 +10,7 @@
             <h1>/math</h1>
             <h2><a href="../">../</a></h2>
             <div style="margin-left: auto;margin-right: 0;">    
-                <h3><a href="./old-versions">Old Versions</a></h3>
+                <h3><a href="./old-versions">Old versions</a></h3>
             </div>
             <noscript><h1 style="font-size: 60px; margin-top: 0; padding-left: 40px; color: red;">you need js, sorry</h1></noscript>
             <noscript><h1 style="font-size: 20px; margin-top: 35px; padding-left: 40px; color: red;">(there's no spookiness i promise)</h1></noscript>
@@ -19,100 +19,175 @@
         <div class="column flex-spaced-1 spaced color-layer-1 border-1">
             <div class="color-layer-2 border-1 spaced"> 
                 <h1>Algebra</h1>
-                <div class="row flex-spaced-1 calculator-container">
-                    <div>
-                        <div class="row">
-                            <h3>Quadratic Operations</h3>
-                            <div class="column flex-spaced-2 right-flex">
-                                <div class="row approx-box">
-                                    <label>
-                                        <input id="quad-approx" type="checkbox">Approximate to&nbsp;
-                                    </label>
-                                    <label>
-                                        <input id="quad-approx-digits" type="number" placeholder="2">&nbsp;digits
-                                    </label>
+                <div class="column flex-spaced-1">
+                    <div class="row flex-spaced-1 calculator-container">
+                        <div>
+                            <div class="row">
+                                <h3>Quadratic operations</h3>
+                                <div class="column flex-spaced-2 right-flex">
+                                    <div class="row approx-box">
+                                        <label>
+                                            <input id="quad-approx" type="checkbox">Approximate to&nbsp;
+                                        </label>
+                                        <label>
+                                            <input id="quad-approx-digits" type="number" placeholder="2">&nbsp;digits
+                                        </label>
+                                    </div>
+                                    <div class="right-flex">
+                                        <label>
+                                            <input id="quad-frac" type="checkbox">Fractionize
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="right-flex">
-                                    <label>
-                                        <input id="quad-frac" type="checkbox">Fractionize
-                                    </label>
+                            </div>
+                            <div class="row">
+                                <label>
+                                    <input id="quad-a" type="text" placeholder="a">
+                                </label>
+                                &nbsp;x<sup>2</sup>&nbsp;+&nbsp;
+                                <label>
+                                    <input id="quad-b" type="text" placeholder="b">
+                                </label>
+                                &nbsp;x&nbsp;+&nbsp;
+                                <label>
+                                    <input id="quad-c" type="text" placeholder="c">
+                                </label>
+                            </div>
+                            <div class="column">
+                                <div class="row top-spaced align-center solutions">
+                                    Solutions:&nbsp;<span id="sol-1">N/A</span>,&nbsp;<span id="sol-2">N/A</span>
+                                </div>
+                                <div class="row top-spaced align-center solutions">
+                                    Vertex:&nbsp;(<span id="vertex-x">N/A</span>,&nbsp;<span id="vertex-y">N/A</span>)
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <label>
-                                <input id="quad-a" type="text" placeholder="a">
-                            </label>
-                            &nbsp;x<sup>2</sup>&nbsp;+&nbsp;
-                            <label>
-                                <input id="quad-b" type="text" placeholder="b">
-                            </label>
-                            &nbsp;x&nbsp;+&nbsp;
-                            <label>
-                                <input id="quad-c" type="text" placeholder="c">
-                            </label>
-                        </div>
-                        <div class="column">
-                            <div class="row top-spaced align-center solutions">
-                                Solutions:&nbsp;<span id="sol-1">N/A</span>,&nbsp;<span id="sol-2">N/A</span>
+                        <div>
+                            <h3>FOILer</h3>
+                            <div class="row">
+                                <label>
+                                    (<input id="foiler-a" type="text" placeholder="a">x&nbsp;
+                                </label>
+                                <label>
+                                    +&nbsp;<input id="foiler-b" type="text" placeholder="b">)&nbsp;
+                                </label>
+                                <label>
+                                    (<input id="foiler-c" type="text" placeholder="c">x&nbsp;
+                                </label>
+                                <label>
+                                    +&nbsp;<input id="foiler-d" type="text" placeholder="d">)
+                                </label>
                             </div>
                             <div class="row top-spaced align-center solutions">
-                                Vertex:&nbsp;(<span id="vertex-x">N/A</span>,&nbsp;<span id="vertex-y">N/A</span>)
+                                Solution:&nbsp;<span id="foiled-poly">N/A</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row">
+                                <h3>Point operations</h3>
+                                <div class="row approx-box right-flex">
+                                    <label>
+                                        <input id="point-approx" type="checkbox">Approximate to&nbsp;
+                                    </label>
+                                    <label>
+                                        <input id="point-approx-digits" type="number" placeholder="2">&nbsp;digits
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label>
+                                    (<input id="points-x1" type="text" placeholder="x1">,&nbsp;
+                                </label>
+                                <label>
+                                    <input id="points-y1" type="text" placeholder="y1">)&nbsp;
+                                </label>
+                                <label>
+                                    (<input id="points-x2" type="text" placeholder="x2">,&nbsp;
+                                </label>
+                                <label>
+                                    <input id="points-y2" type="text" placeholder="y2">)
+                                </label>
+                            </div>
+                            <div class="column">
+                                <div class="row top-spaced text-center solutions">
+                                    Length:&nbsp;<span id="length">N/A</span>
+                                </div>
+                                <div class="row top-spaced text-center solutions">
+                                    Midpoint:&nbsp;(<span id="midpoint-x">N/A</span>,&nbsp;<span id="midpoint-y">N/A</span>)
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <h3>FOILer</h3>
-                        <div class="row">
-                            <label>
-                                (<input id="foiler-a" type="text" placeholder="a">x&nbsp;
-                            </label>
-                            <label>
-                                +&nbsp;<input id="foiler-b" type="text" placeholder="b">)&nbsp;
-                            </label>
-                            <label>
-                                (<input id="foiler-c" type="text" placeholder="c">x&nbsp;
-                            </label>
-                            <label>
-                                +&nbsp;<input id="foiler-d" type="text" placeholder="d">)
-                            </label>
-                        </div>
-                        <div class="row top-spaced align-center solutions">
-                            Solution:&nbsp;<span id="foiled-poly">N/A</span>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="row">
-                            <h3>Point Operations</h3>
-                            <div class="row approx-box right-flex">
-                                <label>
-                                    <input id="point-approx" type="checkbox">Approximate to&nbsp;
-                                </label>
-                                <label>
-                                    <input id="point-approx-digits" type="number" placeholder="2">&nbsp;digits
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label>
-                                (<input id="points-x1" type="text" placeholder="x1">,&nbsp;
-                            </label>
-                            <label>
-                                <input id="points-y1" type="text" placeholder="y1">)&nbsp;
-                            </label>
-                            <label>
-                                (<input id="points-x2" type="text" placeholder="x2">,&nbsp;
-                            </label>
-                            <label>
-                                <input id="points-y2" type="text" placeholder="y2">)
-                            </label>
-                        </div>
-                        <div class="column">
-                            <div class="row top-spaced text-center solutions">
-                                Length:&nbsp;<span id="length">N/A</span>
-                            </div>
-                            <div class="row top-spaced text-center solutions">
-                                Midpoint:&nbsp;(<span id="midpoint-x">N/A</span>,&nbsp;<span id="midpoint-y">N/A</span>)
+                        <div class="row flex-spaced-1 calculator-container">
+                            <div>
+                                <div class="row">
+                                    <h3>Polynomial division</h3>
+                                    <div class="column flex-spaced-2 right-flex">
+                                        <div class="row approx-box">
+                                            <label>
+                                                <input id="quad-approx" type="checkbox">Approximate to&nbsp;
+                                            </label>
+                                            <label>
+                                                <input id="quad-approx-digits" type="number" placeholder="2">&nbsp;digits
+                                            </label>
+                                        </div>
+                                        <div class="right-flex">
+                                            <label>
+                                                <input id="quad-frac" type="checkbox">Fractionize
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row flex-spaced-1">
+                                    <label>
+                                        Dividend degree:&nbsp;&nbsp;<input id="dividend-degree" type="number" placeholder="2">
+                                    </label>
+                                    <label>
+                                        Divisor degree:&nbsp;&nbsp;<input id="disvisor-degree" type="number" placeholder="2">
+                                    </label>
+                                </div>
+                                <div style="height: 10px"></div>
+                                <div class="row">
+                                    <div id="dividend">
+                                        <label>
+                                            <input id="quad-a" type="text" placeholder="0">
+                                        </label>
+                                        &nbsp;x<sup>4</sup>&nbsp;+&nbsp;
+                                        <label>
+                                            <input id="quad-a" type="text" placeholder="0">
+                                        </label>
+                                        &nbsp;x<sup>3</sup>&nbsp;+&nbsp;
+                                        <label>
+                                            <input id="quad-a" type="text" placeholder="0">
+                                        </label>
+                                        &nbsp;x<sup>2</sup>&nbsp;+&nbsp;
+                                        <label>
+                                            <input id="quad-a" type="text" placeholder="0">
+                                        </label>
+                                        &nbsp;x&nbsp;+&nbsp;
+                                        <label>
+                                            <input id="quad-a" type="text" placeholder="0">
+                                        </label>
+                                    </div>
+                                    <div id="divisor">
+                                        &nbsp;&nbsp;/&nbsp;&nbsp;
+                                        <label>
+                                            <input id="quad-a" type="text" placeholder="0">
+                                        </label>
+                                        &nbsp;x<sup>2</sup>&nbsp;+&nbsp;
+                                        <label>
+                                            <input id="quad-a" type="text" placeholder="0">
+                                        </label>
+                                        &nbsp;x&nbsp;+&nbsp;
+                                        <label>
+                                            <input id="quad-a" type="text" placeholder="0">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row top-spaced align-center solutions">
+                                    Quotient:&nbsp;<span id="quotient">N/A</span>&nbsp;+&nbsp;<span id="remainder">N/A</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,7 +198,7 @@
                 <div class="row flex-spaced-1 calculator-container">
                     <div>
                         <div class="row">
-                            <h3>Triangle Trig</h3>
+                            <h3>Triangle trig</h3>
                             <div class="row approx-box right-flex">
                                 <label>
                                     <input id="trig-approx" type="checkbox" disabled checked>Approximate to&nbsp;

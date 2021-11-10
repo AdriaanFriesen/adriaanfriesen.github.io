@@ -241,6 +241,8 @@ function doPointOps() {
     }
 }
 
+
+
 id("trig-a").addEventListener("keyup", doTrig);
 id("trig-b").addEventListener("keyup", doTrig);
 id("trig-c").addEventListener("keyup", doTrig);
