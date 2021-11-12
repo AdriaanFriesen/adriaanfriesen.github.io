@@ -5,7 +5,7 @@
         {
             "name": "Launch index.html in Firefox",
             "type": "firefox",
-            "firefoxExecutable": "C:\\Users\\FPSFriesenA28\\AppData\\Local\\Mozilla Firefox\\firefox.exe",
+            // "firefoxExecutable": "C:\\Users\\FPSFriesenA28\\AppData\\Local\\Mozilla Firefox\\firefox.exe",
             "request": "launch",
             "reAttach": true,
             "file": "${workspaceFolder}/index.html"
