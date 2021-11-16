@@ -241,7 +241,79 @@ function doPointOps() {
     }
 }
 
+id("dividend-degree").addEventListener("keyup", fabricateDivisionInputs);
+id("divisor-degree").addEventListener("keyup", fabricateDivisionInputs);
 
+function fabricateDivisionInputs() {
+    dividendDegree = Number(id("dividend-degree").value);
+    divisorDegree = Number(id("divisor-degree").value);
+    
+    id("dividend").innerHTML = "";
+    id("divisor").innerHTML = "";
+    
+    var newMonomial;
+    
+    for (i = dividendDegree; i >= 0; i--) {
+        newMonomial = document.createElement("span");
+        if (i == 1) {
+            newMonomial.innerHTML = "<label><input type=\"text\" placeholder=\"0\">&nbsp;x</label>&nbsp;+&nbsp;";
+        }
+        else if (i == 0) {
+            newMonomial.innerHTML = "<label><input type=\"text\" placeholder=\"0\"></label>";
+        }
+        else {
+            newMonomial.innerHTML = "<label><input type=\"text\" placeholder=\"0\">&nbsp;x<sup>" + i + "</sup></label>&nbsp;+&nbsp;";
+        }
+        id("dividend").appendChild(newMonomial);
+        newMonomial.addEventListener("keyup", doPolyDivision);
+    }
+    for (i = divisorDegree; i >= 0; i--) {
+        newMonomial = document.createElement("span");
+        if (i == 1) {
+            newMonomial.innerHTML = "<label><input type=\"text\" placeholder=\"0\">&nbsp;x</label>&nbsp;+&nbsp;";
+        }
+        else if (i == 0) {
+            newMonomial.innerHTML = "<label><input type=\"text\" placeholder=\"0\"></label>";
+        }
+        else {
+            newMonomial.innerHTML = "<label><input type=\"text\" placeholder=\"0\">&nbsp;x<sup>" + i + "</sup></label>&nbsp;+&nbsp;";
+        }
+        id("divisor").appendChild(newMonomial);
+        newMonomial.addEventListener("keyup", doPolyDivision);
+    }
+}
+
+function doPolyDivision() {
+    dividendDegree = Number(id("dividend-degree").value);
+    divisorDegree = Number(id("divisor-degree").value);
+
+    var dividend = [];
+    var divisor = [];
+    var quotient = [];
+    var subtract = [];
+
+    var inverse_index;
+
+    for (i = dividendDegree; i >= 0; i--) {
+        inverse_index = ((i - Number(id("dividend").childNodes.length)) * -1) -1;
+        dividend.push({coef: Number(id("dividend").childNodes[inverse_index].childNodes[0].childNodes[0].value), deg: i});
+    }
+    console.log(dividend);
+    for (i = divisorDegree; i >= 0; i--) {
+        inverse_index = ((i - Number(id("divisor").childNodes.length)) * -1) -1;
+        divisor.push({coef: Number(id("divisor").childNodes[inverse_index].childNodes[0].childNodes[0].value), deg: i});
+    }
+    console.log(divisor);
+
+    for (i = 0; i < dividend.length; i++) {
+        quotient.push({coef: dividend[i].coef / divisor[i].coef, deg: dividend[i].deg - divisor[i].deg});
+        subtract = [];
+        for (x = 0; x < divisor.length; x++) {
+            subtract.push({coef: divisor[x].coef * quotient[i].coef, deg: divisor[x].deg + quotient[i].deg});
+        }
+        // TODO: subtract subtract from divisor and make that new divisor
+    }
+}
 
 id("trig-a").addEventListener("keyup", doTrig);
 id("trig-b").addEventListener("keyup", doTrig);
@@ -525,5 +597,6 @@ function degrees(radians) {
 doQuadFormula();
 doFOIL();
 doPointOps();
+fabricateDivisionInputs();
 doTrig();
 doCircle();
