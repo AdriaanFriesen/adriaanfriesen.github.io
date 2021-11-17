@@ -241,10 +241,10 @@ function doPointOps() {
     }
 }
 
-id("dividend-degree").addEventListener("keyup", fabricateDivisionInputs);
-id("divisor-degree").addEventListener("keyup", fabricateDivisionInputs);
+id("dividend-degree").addEventListener("keyup", fabricatePolyDivisionInputs);
+id("divisor-degree").addEventListener("keyup", fabricatePolyDivisionInputs);
 
-function fabricateDivisionInputs() {
+function fabricatePolyDivisionInputs() {
     dividendDegree = Number(id("dividend-degree").value);
     divisorDegree = Number(id("divisor-degree").value);
     
@@ -298,21 +298,39 @@ function doPolyDivision() {
         inverse_index = ((i - Number(id("dividend").childNodes.length)) * -1) -1;
         dividend.push({coef: Number(id("dividend").childNodes[inverse_index].childNodes[0].childNodes[0].value), deg: i});
     }
-    console.log(dividend);
     for (i = divisorDegree; i >= 0; i--) {
         inverse_index = ((i - Number(id("divisor").childNodes.length)) * -1) -1;
         divisor.push({coef: Number(id("divisor").childNodes[inverse_index].childNodes[0].childNodes[0].value), deg: i});
     }
-    console.log(divisor);
 
-    for (i = 0; i < dividend.length; i++) {
+    console.log(divisor);
+    console.log(dividend);
+
+    for (i = 0; i < dividend.length - 1 || i < divisor.length - 1; i++) {
+        console.log(dividend[i].coef);
+        console.log(divisor[i].coef);
+        console.log(dividend[i].deg);
+        console.log(divisor[i].deg);
         quotient.push({coef: dividend[i].coef / divisor[i].coef, deg: dividend[i].deg - divisor[i].deg});
         subtract = [];
         for (x = 0; x < divisor.length; x++) {
             subtract.push({coef: divisor[x].coef * quotient[i].coef, deg: divisor[x].deg + quotient[i].deg});
         }
-        // TODO: subtract subtract from divisor and make that new divisor
+        while (subtract.length < dividend.length) {
+            // console.log("subtract:");
+            // console.log(subtract);
+            subtract.push({coef: 0, deg: subtract[subtract.length - 1].deg - 1});
+        }
+        for (x = 0; x < subtract.length - 1; x++) {
+            // console.log(x);
+            // console.log(dividend);
+            dividend[x] = {coef: dividend[x].coef - subtract[x].coef, deg: dividend[x].deg};
+        }
     }
+    console.log("quotient:");
+    console.log(quotient);
+    console.log("dividend:");
+    console.log(dividend);
 }
 
 id("trig-a").addEventListener("keyup", doTrig);
@@ -597,6 +615,6 @@ function degrees(radians) {
 doQuadFormula();
 doFOIL();
 doPointOps();
-fabricateDivisionInputs();
+fabricatePolyDivisionInputs();
 doTrig();
 doCircle();
