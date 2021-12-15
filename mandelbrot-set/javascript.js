@@ -42,12 +42,17 @@ function complex_addition(comp1, comp2) {
     return [comp1[0] + comp2[0], comp1[1] + comp2[1]]
 }
 
-function set_check(c, x, y) {
+function set_check(c, x, y, lowestval) {
     let z = [0, 0];
-    let max_i = 100;
+    let max_i = 10;
     let i = max_i;
-    if (Math.abs(c[0]) < 0.01 && Math.abs(c[1]) < 0.01)
-    console.log(c);
+    if (Math.abs(c[0]) < lowestval) {
+        lowestval = Math.abs(c[0]);
+    }
+    // if (Math.abs(c[0]) < 0.1 && Math.abs(c[1]) < 0.1) {
+    //     console.log(c);
+    //     console.log(x, y);
+    // }
     while (complex_absolute(z) < 2 && i >= 0) {
         // console.log(z[0], z[1]);
         z = complex_addition(complex_squaring(z), c)
@@ -59,7 +64,6 @@ function set_check(c, x, y) {
         console.log("pixel")
     }
     if (complex_absolute(z) < 2.1) {
-        console.log(x, y);
     }
     // console.log(z[0], z[1]);
 }   
@@ -71,16 +75,17 @@ function render_set() {
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-
     var highest_dim = Math.max(canvas.width, canvas.height);
+
+    var lowestval = 10.0;
     
-    
-    for (var y = render_offset[1]; y <= canvas.height; y += 1 + render_offset[1]) {
-        for (var x = render_offset[0]; x <= canvas.width; x += 1 + render_offset[0]) {
-            set_check([ ( ( ( x / highest_dim ) * 1 ) - ( ( canvas.width / highest_dim ) * 2 ) ), ( ( ( y / highest_dim ) * 1 ) - ( ( canvas.height / highest_dim ) * 2 ) ) ], x, y);
+    for (var y = 0; y <= canvas.height + 0; y += 1) {
+        for (var x = 0; x <= canvas.width + 0; x += 1) {
+            set_check([ ( ( ( x / highest_dim ) * 1 ) - ( ( canvas.width / highest_dim ) * 2 ) ), ( ( ( y / highest_dim ) * 1 ) - ( ( canvas.height / highest_dim ) * 2 ) ) ], x, y, lowestval);
             // console.log(x, y)
         }
     }
+    console.log(lowestval); 
 }
 
 render_set();
