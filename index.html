@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>adriaan friesen</title>
         <style>
             body {
                 background: #111111;
-                font-family: helvetica, sans-serif;
+                font-family: Helvetica, sans-serif;
                 font-size: 20px;
-                color: #ffa500;
             }
             
             h2 {
                 font-size: 40px;
-                color: #c12adc;
+                color: #38b869;
             }
             
             #main-title {
                 font-size: 120px;
                 height: 138.4px;
+                color: #ffa500;
             }
             
             a {
                 color: #ce33a5;
                 text-decoration: none;
                 padding: 0;
-                transition: all 1s cubic-bezier(.35,.87,.42,1);
             }
             
-            a:hover {
-                /* transform: scale(calc(5 / 3)); */
-                font-size: 40px;
+            p {
+                color: #7e75ff;
+                width: 60%;
+                border: 2px solid;
+                padding: 5px;
             }
             
             .grow-header {
@@ -49,7 +51,12 @@
                 display: flex;
                 align-items: center;
                 height: 60px;
-                transition: all 0.25s cubic-bezier(.35,.87,.42,1);
+                transition: all 0.5s cubic-bezier(.35,.87,.42,1);
+            }
+            
+            .grow-link:hover {
+                /* transform: scale(calc(5 / 3)); */
+                font-size: 40px;
             }
 
             .description {
@@ -63,12 +70,13 @@
         </h1>
 
         <h2>about</h2>
-        <p>My interests include: making functional websites. Things <a href="./math" style="font-size: 20px;">/math</a></p>
+        <p>My interests include: Photography. I have a DSLR that I got at the end of 2020, and some cherrypicked pictures are availible in my <a href="./gallery">gallery</a>.<br><br>Making <i>functional</i> websites. Things like <a href="./math">/math</a> are what I enjoy doing most. Autobiography type things are my least favorite type of content to make.</p>
 
+        <div style="height: 40px;"></div>
+
+        <h2>projects</h2>
         <div class="grow-link"><a href="./math">/math<span class="description"> - calculator for math stuffs</span></a></div>
-        <div class="grow-link"><a href="./les-catacombs">french 2 géoculture project</a></div>
         <div class="grow-link"><a href="./mandelbrot-set">web mandelbrot set renderer<span class="description"> (incomplete)</a></span></div>
         <div class="grow-link"><a href="./spin-cube">3d spinning cube<span class="description"> (pure css)</span></a></div>
-        <div class="grow-link"><a href="./python-intro">python introduction made in web design class</a></div>
     </body>
 </html>

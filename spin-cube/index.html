@@ -2,6 +2,10 @@
 <html>
     <head>
         <style>
+            body {
+                font-family: helvetica, sans-serif;
+            }
+            
             div.spinner {
                 font-size: 3em;
                 width: 400px;
@@ -15,7 +19,6 @@
                 opacity: 0.5
                 
             }
-            
 
             @keyframes spin-front {
                 0% {transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate3d(0px, 0px, 200px);}
@@ -59,6 +62,17 @@
                 left: 50%;
                 top: 155px;
             }
+
+            h2 {
+                font-size: 40px;
+            }
+
+            a {
+                color: #ce33a5;
+                text-shadow: 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111;
+                text-decoration: none;
+                padding: 0;
+            }
         </style>
     </head>
     <body>
@@ -70,5 +84,7 @@
             <div class="spinner" style="animation: spin-top 3s linear infinite; background-color: yellow"></div>
             <div class="spinner" style="animation: spin-bottom 3s linear infinite; background-color: purple"></div>
         </div>
+        <canvas id="canvas1" width="0px" height="0px"></canvas>
+        <h2 style="position: absolute; top: 1rem; right: 1rem; margin: 0"><a href="../">back</a></h2>
     </body>
 </html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>adriaan friesen</title>
+        <style>
+            body {
+                background: #111111;
+                font-family: helvetica, sans-serif;
+                font-size: 20px;
+                margin-top: 0;
+            }
+            
+            h2 {
+                font-size: 40px;
+            }
+            
+            #main-title {
+                font-size: 120px;
+                height: 138.4px;
+                color: #ffa500;
+            }
+            
+            a {
+                color: #ce33a5;
+                text-decoration: none;
+                padding: 0;
+            }
+
+            .flex {
+                display: flex;
+            }
+
+            .row {
+                flex-direction: row;
+            }
+            .column {
+                flex-direction: column;
+            }
+
+            .fit-items > * {
+                flex-grow: 1;
+                flex-shrink: 1;
+                min-width: 0;
+            }
+
+            .full-width {
+                width: 100%
+            }
+
+            .gap-1 {
+                gap: 8px
+            }
+
+            .align-right {
+                margin-left: auto;
+            }
+
+            img {
+                border: 3px solid #c4c4c4;
+                border-radius: 3px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="flex row">
+            <h1 id="main-title">gallery</h1>
+            <div class="align-right"><h2><a href="../" style="margin-right: 3rem;">back</a></h2></div>
+        </div>
+        <div class="flex column gap-1">
+            <div class="flex row fit-items full-width gap-1">
+                <img src="../resources/images/photography/moon_long_exposure.jpg">
+                <img src="../resources/images/photography/moon.jpg">
+                <img src="../resources/images/photography/red_sun.jpg">
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <img src="../resources/images/photography/beach.jpg">
+                <img src="../resources/images/photography/dock_over_the_lake.jpg">
+                <img src="../resources/images/photography/macinac_brige_night.jpg">
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <img src="../resources/images/photography/daddy_bird_on_roof.jpg">
+                <img src="../resources/images/photography/baby_bird_on_stump.jpg">
+                <img src="../resources/images/photography/mama_bird_in_grass.jpg">
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <img src="../resources/images/photography/mama_bird_on_stump.jpg">
+                <img src="../resources/images/photography/daddy_bird_on_pole.jpg">
+                <img src="../resources/images/photography/daddy_bird_on_chair.jpg">
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <img src="../resources/images/photography/double_cranes.jpg">
+                <img src="../resources/images/photography/crane.jpg">
+                <img src="../resources/images/photography/bird_on_mitten.jpg">
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <img src="../resources/images/photography/on_rock.jpg">
+                <img src="../resources/images/photography/laughing_portrait.jpg">
+                <img src="../resources/images/photography/leaves_in_the_air_portrait.jpg">
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <img src="../resources/images/photography/mushroom_on_log.jpg">
+                <img src="../resources/images/photography/tree_to_the_sky.jpg">
+                <img src="../resources/images/photography/pirate_ship.jpg">
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <img src="../resources/images/photography/frosty_grass.jpg">
+                <img src="../resources/images/photography/winter_trail_1.jpg">
+                <img src="../resources/images/photography/winter_trail_2.jpg">
+            </div>
+        </div>
+    </body>
+</html>

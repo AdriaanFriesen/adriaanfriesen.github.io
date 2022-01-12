@@ -2,21 +2,21 @@
     "version": "0.2.0",
     "configurations": [
 
-        // {
-        //     "name": "Launch index.html in Firefox",
-        //     "type": "firefox",
-        //     // "firefoxExecutable": "C:\\Users\\FPSFriesenA28\\AppData\\Local\\Mozilla Firefox\\firefox.exe",
-        //     "request": "launch",
-        //     "reAttach": true,
-        //     "file": "${workspaceFolder}/index.html"
-        // },
         {
-            "name": "Launch index.html in Chrome",
-            "type": "chrome",
+            "name": "Launch index.html in Firefox",
+            "type": "firefox",
+            // "firefoxExecutable": "C:\\Users\\FPSFriesenA28\\AppData\\Local\\Mozilla Firefox\\firefox.exe",
             "request": "launch",
             "reAttach": true,
             "file": "${workspaceFolder}/index.html"
-        }// ,
+        }
+        // {
+        //     "name": "Launch index.html in Chrome",
+        //     "type": "chrome",
+        //     "request": "launch",
+        //     "reAttach": true,
+        //     "file": "${workspaceFolder}/index.html"
+        // }
         // {
         //     "name": "Launch index.html in Edge",
         //     "type": "pwa-msedge",
