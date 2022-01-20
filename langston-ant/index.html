@@ -3,17 +3,45 @@
     <head>
         <meta charset="utf-8">
         <style>
+            body {
+                font-family: Helvetica, sans-serif;
+            }
+
             #canvas1 {
                     background-color: white;
                     position: absolute;
                     left: 0;
                     top: 0;
-                }
+            }
+
+            .flex {
+                display: flex;
+            }
+
+            .row {
+                flex-direction: row;
+            }
+            .column {
+                flex-direction: column;
+            }
         </style>
     </head>
     <body>
         <canvas id="canvas1" width="0px" height="0px"></canvas>
+        <div class="flex column" style="position: absolute; top: 1rem; left: 1rem; margin: 0">
+            <div class="flex row">
+                <label for="step-interval">step inteval (ms):&nbsp;</label>
+                <input id="step-interval" type="number" placeholder="100">
+            </div>
+            <div>
+                step:&nbsp;<span id="step-counter">0</span>
+            </div>
+        </div>
         <script>
+            function $(element) {
+                return(document.getElementById(element));
+            }
+
             var c = document.getElementById("canvas1");
             var ctx = c.getContext("2d");
             window.addEventListener('resize',  function() { 
@@ -25,14 +53,13 @@
             c.height = window.innerHeight;
 
             const boardScaling = 8;
-
             
             class Ant {
                 constructor(x, y, direction) {
                     this.x = x;
                     this.y = y;
                     this.x1 = x;
-                    this. y1 = y;
+                    this.y1 = y;
                     this.direction = direction;
                 }
                 
@@ -105,6 +132,8 @@
             
             board = []
 
+            step = 0;
+
             for (let x = 0; x < c.width / boardScaling; x++) {
                 board.push([]);
                 for (let y = 0; y < c.height / boardScaling; y++) {
@@ -115,13 +144,23 @@
             function tick() {
                 render(board, ant);
                 ant.move(board);
-                // console.log("tick")
+                step++;
+                $("step-counter").innerHTML = step;
             }
+
+            function interval() {
+                clearInterval(intervalTimer)
+                if ($("step-interval").value) {
+                    intervalTimer = setInterval(tick, $("step-interval").value);
+                }
+                else {
+                    intervalTimer = setInterval(tick, 100)
+                }
+            }
+
+            $("step-interval").addEventListener("keyup", interval);
             
-            window.addEventListener('mousedown',  function() { 
-                tick()
-            }, false);
-            setInterval(tick, 100);
+            intervalTimer = setInterval(tick, 100);
         </script>
     </body>
 </html>
