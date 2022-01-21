@@ -2,165 +2,19 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <style>
-            body {
-                font-family: Helvetica, sans-serif;
-            }
-
-            #canvas1 {
-                    background-color: white;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-            }
-
-            .flex {
-                display: flex;
-            }
-
-            .row {
-                flex-direction: row;
-            }
-            .column {
-                flex-direction: column;
-            }
-        </style>
+        <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
         <canvas id="canvas1" width="0px" height="0px"></canvas>
         <div class="flex column" style="position: absolute; top: 1rem; left: 1rem; margin: 0">
             <div class="flex row">
-                <label for="step-interval">step inteval (ms):&nbsp;</label>
-                <input id="step-interval" type="number" placeholder="100">
+                <label for="step-interval">step interval (ms):&nbsp;</label>
+                <input id="step-interval" type="number" placeholder="100" class="no-arrows" style="width: 28px;">
             </div>
             <div>
                 step:&nbsp;<span id="step-counter">0</span>
             </div>
         </div>
-        <script>
-            function $(element) {
-                return(document.getElementById(element));
-            }
-
-            var c = document.getElementById("canvas1");
-            var ctx = c.getContext("2d");
-            window.addEventListener('resize',  function() { 
-                c.width = window.innerWidth;
-                c.height = window.innerHeight;
-            }, false);
-
-            c.width = window.innerWidth;
-            c.height = window.innerHeight;
-
-            const boardScaling = 8;
-            
-            class Ant {
-                constructor(x, y, direction) {
-                    this.x = x;
-                    this.y = y;
-                    this.x1 = x;
-                    this.y1 = y;
-                    this.direction = direction;
-                }
-                
-                correctDirection() {
-                    if (this.direction == -90) {
-                        this.direction = 270;
-                    }
-                    else if (this.direction == 360) {
-                        this.direction = 0;
-                    }
-                }
-                
-                move(board) {
-                    if (board[this.x][this.y]) {
-                        this.direction -= 90;
-                    }
-                    else {
-                        this.direction += 90;
-                    }
-                    this.correctDirection()
-                    
-                    board[this.x][this.y] = !board[this.x][this.y]
-                    
-                    if (this.direction == 0) {
-                        this.y += 1;
-                    }
-                    else if (this.direction == 90) {
-                        this.x += 1;
-                    }
-                    else if (this.direction == 180) {
-                        this.y -= 1;
-                    }
-                    else if (this.direction == 270) {
-                        this.x -= 1;
-                    }
-                }
-            }
-
-            function render(board, ant) {
-                for (let x = 0; x < board.length; x++) {
-                    for (let y = 0; y < board[0].length; y++) {
-                        if (board[x][y]) {
-                            ctx.fillStyle = "#000000";
-                        }
-                        else {
-                            ctx.fillStyle = "#ffffff";
-                        }
-
-                        ctx.fillRect(x * boardScaling, y * boardScaling, boardScaling, boardScaling)
-                    }
-                }
-
-                ctx.fillStyle = "#ff0000";
-                ctx.fillRect(ant.x * boardScaling, ant.y * boardScaling, boardScaling, boardScaling);
-
-                if (board[ant.x][ant.y]) {
-                            ctx.fillStyle = "#000000";
-                        }
-                        else {
-                            ctx.fillStyle = "#ffffff";
-                        }
-
-                ctx.fillRect((ant.x * boardScaling) + boardScaling - Math.round(boardScaling * 0.8),
-                    (ant.y * boardScaling) + boardScaling - Math.round(boardScaling * 0.8),
-                    Math.round(boardScaling * 0.8) - (boardScaling - Math.round(boardScaling * 0.8)),
-                    Math.round(boardScaling * 0.8) - (boardScaling - Math.round(boardScaling * 0.8)));
-            }
-            
-            ant = new Ant(Math.round(c.width / (boardScaling * 2)), Math.round(c.height / (boardScaling * 2)), 0);
-            
-            board = []
-
-            step = 0;
-
-            for (let x = 0; x < c.width / boardScaling; x++) {
-                board.push([]);
-                for (let y = 0; y < c.height / boardScaling; y++) {
-                    board[x].push(false);
-                }
-            }
-
-            function tick() {
-                render(board, ant);
-                ant.move(board);
-                step++;
-                $("step-counter").innerHTML = step;
-            }
-
-            function interval() {
-                clearInterval(intervalTimer)
-                if ($("step-interval").value) {
-                    intervalTimer = setInterval(tick, $("step-interval").value);
-                }
-                else {
-                    intervalTimer = setInterval(tick, 100)
-                }
-            }
-
-            $("step-interval").addEventListener("keyup", interval);
-            
-            intervalTimer = setInterval(tick, 100);
-        </script>
+        <script src="javascript.js"></script>
     </body>
 </html>

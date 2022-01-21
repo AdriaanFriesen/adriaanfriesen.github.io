@@ -39,7 +39,7 @@
                 align-items: center;
                 height: 138.4px;
                 float: inline-start;
-                transition: all 1s cubic-bezier(.35,.87,.42,1);
+                transition: all 0.5s cubic-bezier(.35,.87,.42,1);
             }
             
             .grow-header:hover {
@@ -51,12 +51,13 @@
                 display: flex;
                 align-items: center;
                 height: 60px;
+                transform-origin: left;
                 transition: all 0.5s cubic-bezier(.35,.87,.42,1);
             }
             
             .grow-link:hover {
-                /* transform: scale(calc(5 / 3)); */
-                font-size: 40px;
+                transform: scale(2);
+                /* font-size: 40px; */
             }
 
             .description {
@@ -69,14 +70,10 @@
             <div class="grow-header">a</div><div class="grow-header">d</div><div class="grow-header">r</div><div class="grow-header">i</div><div class="grow-header">a</div><div class="grow-header">a</div><div class="grow-header">n</div><div class="grow-header">&nbsp;</div><div class="grow-header">f</div><div class="grow-header">r</div><div class="grow-header">i</div><div class="grow-header">e</div><div class="grow-header">s</div><div class="grow-header">e</div><div class="grow-header">n</div>
         </h1>
 
-        <!-- <h2>about</h2>
-        <p>My interests include: Photography. I have a DSLR that I got at the end of 2020, and some cherrypicked pictures are availible in my <a href="./gallery">gallery</a>.<br><br>Making <i>functional</i> websites. Things like <a href="./math">/math</a> are what I enjoy doing most. Autobiography type things are my least favorite type of content to make.</p>
-
-        <div style="height: 40px;"></div> -->
-
         <div class="grow-link"><a href="./math">/math<span class="description"> - calculator for math stuffs</span></a></div>
         <div class="grow-link"><a href="./langston-ant">langston's ant<span class="description"> - cellular automaton</span></a></div>
         <div class="grow-link"><a href="./mandelbrot-set">web mandelbrot set renderer<span class="description"> (incomplete)</a></span></div>
         <div class="grow-link"><a href="./spin-cube">3d spinning cube<span class="description"> (pure css)</span></a></div>
+        <div class="grow-link"><a href="./gallery">photography gallery</a></div>
     </body>
 </html>
