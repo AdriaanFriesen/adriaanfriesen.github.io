@@ -3,29 +3,44 @@
     <head>
         <title>Mandelbrot Set</title>
         <style>
+            body {
+                font-family: Helvetica, sans-serif;
+            }
             #canvas1 {
                 background-color: white;
                 position: absolute;
                 left: 0;
                 top: 0;
             }
+            
+            h2 {
+                font-size: 40px;
+            }
+
+            a {
+                color: #ce33a5;
+                text-shadow: 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111, 0 0 3px #111111;
+                text-decoration: none;
+                padding: 0;
+            }
         </style>
     </head>
     <body>
         <canvas id="canvas1" width="0px" height="0px"></canvas>
+        <h2 style="position: absolute; top: 1rem; right: 1rem; margin: 0"><a href="../">back</a></h2>
         <script>    
             var c = document.getElementById("canvas1");
             var ctx = c.getContext("2d");
-
+            
             var mouse_pos_start = [null, null];
             var mouse_pos_new = [null, null]
             var dragging = null;
-
+            
             c.addEventListener('mousedown', function(evt) {
                 dragging = true;
                 mouse_pos_start = [evt.offsetX, evt.offsetY];
             }, false)
-
+            
             c.addEventListener('mousemove', function(evt) {
                 mouse_pos_new = [evt.offsetX, evt.offsetY];
                 if (dragging) {
@@ -34,7 +49,7 @@
                     render_set();
                 }
             }, false);
-
+            
             c.addEventListener('mouseup', function(evt) {
                 dragging = false;
             }, false)

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>adriaan friesen</title>
+        <style>
+            body {
+                background: #111111;
+                color: #36a9b1;
+                font-family: helvetica, sans-serif;
+                font-size: 20px;
+                margin-top: 0;
+            }
+            
+            h2 {
+                font-size: 40px;
+            }
+
+            h3 {
+                font-size: 24px;
+            }
+
+            .non-bold {
+                font-weight: 400;
+            }
+            
+            #main-title {
+                font-size: 120px;
+                height: 138.4px;
+                color: #ffa500;
+            }
+            
+            a {
+                color: #ce33a5;
+                text-decoration: none;
+                padding: 0;
+            }
+
+            .flex {
+                display: flex;
+            }
+
+            .row {
+                flex-direction: row;
+            }
+            .column {
+                flex-direction: column;
+            }
+
+            .fit-items > * {
+                flex-grow: 1;
+                flex-shrink: 1;
+                min-width: 0;
+            }
+
+            .full-width {
+                width: 100%
+            }
+
+            .gap-1 {
+                gap: 8px;
+            }
+
+            .gap-2 {
+                gap: 2rem;
+            }
+
+            .align-right {
+                margin-left: auto;
+            }
+            .align-bottom {
+                margin-top: auto;
+            }
+
+            .align-center {
+                display: flex;
+                align-items: center;
+            }
+
+            img {
+                border: 3px solid #c4c4c4;
+                border-radius: 3px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="flex row">
+            <div class="flex row gap-2">
+                <h1 id="main-title">gallery</h1>
+                <div class="align-center">
+                    <h3 style="margin-top: 3rem;">click pictures for<br>full resolution</h3>
+                </div>
+            </div>
+            <div class="flex column align-right" style="margin-right: 3rem;">
+                <div class="align-right">
+                    <h2><a href="../">back to home</a></h2>
+                </div>
+                <div class="align-bottom">
+                    <h3 style="margin-bottom: 4rem">all photos availible under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a><br><span class="non-bold">a link to this page and my name is sufficient attribution</span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="flex column gap-1">
+            <div class="flex row fit-items full-width gap-1">
+                <a class="flex fit-items" href="../resources/images/photography/full-res/moon_long_exposure.jpg"><img src="../resources/images/photography/preview/moon_long_exposure.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/moon.jpg"><img src="../resources/images/photography/preview/moon.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/red_sun.jpg"><img src="../resources/images/photography/preview/red_sun.jpg"></a>
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <a class="flex fit-items" href="../resources/images/photography/full-res/beach.jpg"><img src="../resources/images/photography/preview/beach.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/dock_over_the_lake.jpg"><img src="../resources/images/photography/preview/dock_over_the_lake.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/macinac_brige_night.jpg"><img src="../resources/images/photography/preview/macinac_brige_night.jpg"></a>
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <a class="flex fit-items" href="../resources/images/photography/full-res/daddy_bird_on_roof.jpg"><img src="../resources/images/photography/preview/daddy_bird_on_roof.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/baby_bird_on_stump.jpg"><img src="../resources/images/photography/preview/baby_bird_on_stump.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/mama_bird_in_grass.jpg"><img src="../resources/images/photography/preview/mama_bird_in_grass.jpg"></a>
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <a class="flex fit-items" href="../resources/images/photography/full-res/mama_bird_on_stump.jpg"><img src="../resources/images/photography/preview/mama_bird_on_stump.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/daddy_bird_on_pole.jpg"><img src="../resources/images/photography/preview/daddy_bird_on_pole.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/daddy_bird_on_chair.jpg"><img src="../resources/images/photography/preview/daddy_bird_on_chair.jpg"></a>
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <a class="flex fit-items" href="../resources/images/photography/full-res/double_cranes.jpg"><img src="../resources/images/photography/preview/double_cranes.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/crane.jpg"><img src="../resources/images/photography/preview/crane.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/bird_on_mitten.jpg"><img src="../resources/images/photography/preview/bird_on_mitten.jpg"></a>
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <a class="flex fit-items" href="../resources/images/photography/full-res/on_rock.jpg"><img src="../resources/images/photography/preview/on_rock.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/laughing_portrait.jpg"><img src="../resources/images/photography/preview/laughing_portrait.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/leaves_in_the_air_portrait.jpg"><img src="../resources/images/photography/preview/leaves_in_the_air_portrait.jpg"></a>
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <a class="flex fit-items" href="../resources/images/photography/full-res/mushroom_on_log.jpg"><img src="../resources/images/photography/preview/mushroom_on_log.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/tree_to_the_sky.jpg"><img src="../resources/images/photography/preview/tree_to_the_sky.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/pirate_ship.jpg"><img src="../resources/images/photography/preview/pirate_ship.jpg"></a>
+            </div>
+            <div class="flex row fit-items full-width gap-1">
+                <a class="flex fit-items" href="../resources/images/photography/full-res/frosty_grass.jpg"><img src="../resources/images/photography/preview/frosty_grass.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/winter_trail_1.jpg"><img src="../resources/images/photography/preview/winter_trail_1.jpg"></a>
+                <a class="flex fit-items" href="../resources/images/photography/full-res/winter_trail_2.jpg"><img src="../resources/images/photography/preview/winter_trail_2.jpg"></a>
+            </div>
+        </div>
+    </body>
+</html>

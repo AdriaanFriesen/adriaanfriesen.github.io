@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>adriaan friesen</title>
         <style>
             body {
                 background: #111111;
-                font-family: helvetica, sans-serif;
-                color: orange;
+                font-family: Helvetica, sans-serif;
+                font-size: 20px;
+            }
+            
+            h2 {
+                font-size: 40px;
+                color: #38b869;
             }
             
             #main-title {
                 font-size: 120px;
                 height: 138.4px;
+                color: #ffa500;
             }
             
             a {
                 color: #ce33a5;
                 text-decoration: none;
-                font-size: 24px;
                 padding: 0;
-                transition: all 1s cubic-bezier(.35,.87,.42,1);
             }
             
-            a:hover {
-                /* transform: scale(calc(5 / 3)); */
-                font-size: 40px;
+            p {
+                color: #7e75ff;
+                width: 60%;
+                border: 2px solid;
+                padding: 5px;
             }
             
             .grow-header {
@@ -32,7 +39,7 @@
                 align-items: center;
                 height: 138.4px;
                 float: inline-start;
-                transition: all 1s cubic-bezier(.35,.87,.42,1);
+                transition: all 0.5s cubic-bezier(.35,.87,.42,1);
             }
             
             .grow-header:hover {
@@ -44,7 +51,13 @@
                 display: flex;
                 align-items: center;
                 height: 60px;
-                transition: all 0.25s cubic-bezier(.35,.87,.42,1);
+                transform-origin: left;
+                transition: all 0.5s cubic-bezier(.35,.87,.42,1);
+            }
+            
+            .grow-link:hover {
+                transform: scale(2);
+                /* font-size: 40px; */
             }
 
             .description {
@@ -56,10 +69,11 @@
         <h1 id="main-title">
             <div class="grow-header">a</div><div class="grow-header">d</div><div class="grow-header">r</div><div class="grow-header">i</div><div class="grow-header">a</div><div class="grow-header">a</div><div class="grow-header">n</div><div class="grow-header">&nbsp;</div><div class="grow-header">f</div><div class="grow-header">r</div><div class="grow-header">i</div><div class="grow-header">e</div><div class="grow-header">s</div><div class="grow-header">e</div><div class="grow-header">n</div>
         </h1>
-        <div class="grow-link"><a href="./math">/math<span class="description"> - calculator for various things including quadratic equations, trigonometry, etc</span></a></div>
-        <div class="grow-link"><a href="./les-catacombs">french 2 géoculture project</a></div>
-        <div class="grow-link"><a href="./mandelbrot-set">web mandelbrot set renderer<span class="description"> (incomplete and buggy)</a></span></div>
+
+        <div class="grow-link"><a href="./math">/math<span class="description"> - calculator for math stuffs</span></a></div>
+        <div class="grow-link"><a href="./langston-ant">langston's ant<span class="description"> - cellular automaton</span></a></div>
+        <div class="grow-link"><a href="./mandelbrot-set">web mandelbrot set renderer<span class="description"> (incomplete)</a></span></div>
         <div class="grow-link"><a href="./spin-cube">3d spinning cube<span class="description"> (pure css)</span></a></div>
-        <div class="grow-link"><a href="./python-intro">python introduction made in web design class</a></div>
+        <div class="grow-link"><a href="./gallery">photography gallery</a></div>
     </body>
 </html>

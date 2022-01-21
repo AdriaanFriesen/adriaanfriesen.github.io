@@ -9,14 +9,14 @@
             "request": "launch",
             "reAttach": true,
             "file": "${workspaceFolder}/index.html"
-        }// ,
+        }
         // {
         //     "name": "Launch index.html in Chrome",
         //     "type": "chrome",
         //     "request": "launch",
         //     "reAttach": true,
         //     "file": "${workspaceFolder}/index.html"
-        // },
+        // }
         // {
         //     "name": "Launch index.html in Edge",
         //     "type": "pwa-msedge",
