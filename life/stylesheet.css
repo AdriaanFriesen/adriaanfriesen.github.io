@@ -1,0 +1,44 @@
+body {
+    font-family: Helvetica, sans-serif;
+    color: #eeeeee;
+    text-shadow: 0px 0px 3px #333333, 0px 0px 3px #333333, 0px 0px 3px #333333, 0px 0px 3px #333333;
+}
+
+#canvas1 {
+    background-color: #333333;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+input {
+    background-color: #333333;
+    color: #eeeeee;
+    text-shadow: 0px 0px 3px #333333, 0px 0px 3px #333333, 0px 0px 3px #333333, 0px 0px 3px #333333;
+    box-shadow: 0px 0px 3px #333333, 0px 0px 3px #333333, 0px 0px 3px #333333, 0px 0px 3px #333333;
+    border: 2px solid #eeeeee;
+    border-radius: 2px;
+}
+
+.flex {
+    display: flex;
+}
+
+.row {
+    flex-direction: row;
+}
+.column {
+    flex-direction: column;
+}
+
+/* Get rid of number input's up and down buttons in Firefox */
+.no-arrows {
+    -moz-appearance: textfield;
+}
+
+/* Do the same thing in everything else (isn't Firefox's simpler, better, and more intuitive?) */
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
