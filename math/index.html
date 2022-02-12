@@ -13,8 +13,8 @@
             <noscript><h1 style="font-size: 20px; margin-top: 35px; padding-left: 40px; color: red;">(there's no spookiness i promise)</h1></noscript>
         </div>
         
-        <div class="column flex-spaced-1 spaced color-layer-1 border-1">
-            <div class="color-layer-2 border-1 spaced"> 
+        <div class="column flex-spaced-1 spaced-1 color-layer-1 border-1">
+            <div class="color-layer-2 border-1 spaced-1"> 
                 <h1>Algebra</h1>
                 <div class="row flex-spaced-1 calculator-container">
                     <div>
@@ -115,7 +115,7 @@
                     </div>
                 </div>
             </div>
-            <div class="color-layer-2 border-1 spaced">
+            <div class="color-layer-2 border-1 spaced-1">
                 <h1>Geometry</h1>
                 <div class="row flex-spaced-1 calculator-container">
                     <div>
@@ -173,7 +173,6 @@
                         </div>
                     </div>
                     <div>
-                    <div>
                         <div class="row">
                             <h3>Circles</h3>
                             <div class="row approx-box right-flex">
@@ -206,6 +205,61 @@
                             </div>
                             <div class="centered-content justify-center align-center text-center solutions">
                                 <span id="circle-no-sol"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="color-layer-2 border-1 spaced-1">
+                <h1>Statistics</h1>
+                <div class="row flex-spaced-1 calculator-container">
+                    <div>
+                        <div class="row">
+                            <h3>Normal Function</h3>
+                            <div class="row approx-box right-flex">
+                                <label>
+                                    <input id="normal-approx" type="checkbox" disabled checked>Approximate to&nbsp;
+                                </label>
+                                <label>
+                                    <input id="normal-approx-digits" type="number" placeholder="2">&nbsp;digits
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row flex-spaced-2">
+                            <div class="column flex-spaced-2">
+                                <div class="row flex-spaced-2">
+                                    <div>
+                                        Mean:&nbsp;<input id="normal-mean" type="text" placeholder="μ">
+                                    </div>
+                                    <div>
+                                        Standard Deviation:&nbsp;<input id="normal-sd" type="text" placeholder="σ">
+                                    </div>
+                                </div>
+                                <div class="row flex-spaced-2">
+                                    <div class="row align-center">
+                                        Probability of&nbsp;
+                                        <span class="highlight-color border-2 spaced-2">
+                                            <label>
+                                                <input id="normal-lower-infinite" type="radio" name="normal-lower" checked>-&infin;
+                                            </label>
+                                            <div style="display: inline-block; width: 5px;"></div>
+                                            <input id="normal-lower-finite" type="radio" name="normal-lower">
+                                            <input id="normal-a" type="text" placeholder="a">
+                                        </span>
+                                        &nbsp;to&nbsp;
+                                        <span class="highlight-color border-2 spaced-2">
+                                            <label>
+                                                <input id="normal-upper-infinite" type="radio" name="normal-upper" checked>&infin;
+                                            </label>
+                                            <div style="display: inline-block; width: 5px;"></div>
+                                            <input id="normal-upper-finite" type="radio" name="normal-upper">
+                                            <input id="normal-b" type="text" placeholder="b">
+                                        </span>&nbsp;:
+                                    </div>
+                                </div>
+                                <div class="row align-center solutions">
+                                    <span id="normal-prob"></span>
+                                </div>
                             </div>
                         </div>
                     </div>

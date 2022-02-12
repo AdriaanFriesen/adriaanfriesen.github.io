@@ -9,7 +9,7 @@ body {
     background-color: #454046;
     color: white;
     font-family: "Myriad Pro", sans-serif;
-    font-size: 16   px;
+    font-size: 16px;
 }
 
 #header-container {
@@ -74,8 +74,12 @@ input {
     gap: 5px;
 }
 
-.spaced {
+.spaced-1 {
     padding: 10px;
+}
+
+.spaced-2 {
+    padding: 5px;
 }
 
 .top-spaced {
@@ -99,6 +103,10 @@ input {
 
 .color-layer-2 {
     background-color: #6b387a;
+}
+
+.highlight-color {
+    background-color: #7f29a7;
 }
 
 .centered-content {
@@ -152,7 +160,7 @@ input {
     padding: 5px;
 }
 
-input {
+input[type="text"], input[type="number"] {
     width: 25px;
 }
 
