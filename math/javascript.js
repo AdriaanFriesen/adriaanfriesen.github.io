@@ -2,6 +2,10 @@ function id(elem) {
     return document.getElementById(elem);
 }
 
+function isNumeric(input) {
+    return (input - 0) == input && (''+input).trim().length > 0;
+}
+
 id("quad-a").addEventListener("keyup", doQuadFormula);
 id("quad-b").addEventListener("keyup", doQuadFormula);
 id("quad-c").addEventListener("keyup", doQuadFormula);
@@ -22,7 +26,11 @@ function doQuadFormula() {
     }
 
     else {
-        approxDigits = Number(approxDigits)
+        approxDigits = Number(approxDigits);
+        if (approxDigits > 11) {
+            approxDigits = 11;
+            id("quad-approx-digits").value = "11";
+        }
     }
     if (a.length) {
         var a = Number(a);
@@ -204,7 +212,11 @@ function doPointOps() {
         approxDigits = 2;
     }
     else {
-        approxDigits = Number(approxDigits)
+        approxDigits = Number(approxDigits);
+        if (approxDigits > 11) {
+            approxDigits = 11;
+            id("point-approx-digits").value = "11";
+        }
     }
 
     if (x1.length > 0 && y1.length > 0 && x2.length > 0 && y2.length > 0) {
@@ -263,7 +275,11 @@ function doTrig() {
         approxDigits = 2;
     }
     else {
-        approxDigits = Number(approxDigits)
+        approxDigits = Number(approxDigits);
+        if (approxDigits > 11) {
+            approxDigits = 11;
+            id("trig-approx-digits").value = "11";
+        }
     }
 
     var sides = 0;
@@ -378,7 +394,11 @@ function doCircle() {
         approxDigits = 2;
     }
     else {
-        approxDigits = Number(approxDigits)
+        approxDigits = Number(approxDigits);
+        if (approxDigits > 11) {
+            approxDigits = 11;
+            id("circle-approx-digits").value = "11";
+        }
     }
 
     var inputs = 0;
@@ -461,6 +481,107 @@ function doCircle() {
     }
 }
 
+
+var NMVars = {m: 0, s: 1, a: -1, b: 1};
+
+function n(x) {
+    return (1 / (NMVars.s * Math.pow(2 * Math.PI, 0.5))) * Math.pow(Math.E, -0.5 * Math.pow(((x - NMVars.m) / NMVars.s), 2));
+}
+
+function integrate(f, a, b, n) {
+    var i, x, n2 = n * 2, h = (b - a) / n2;
+    var sum = f(a) + f(b);
+  
+    for(i = 1; i < n2; i += 2) {
+        sum += 4 * f(a + i * h);
+    }
+  
+    for(i = 2; i < n2 - 1; i += 2) {
+        sum += 2 * f(a + i * h);
+    }
+  
+    return Math.abs(sum * h / 3);
+}
+
+id("normal-a").addEventListener("keyup", doNormal);
+id("normal-b").addEventListener("keyup", doNormal);
+id("normal-mean").addEventListener("keyup", doNormal);
+id("normal-sd").addEventListener("keyup", doNormal);
+id("normal-lower-infinite").addEventListener("change", doNormal);
+id("normal-lower-finite").addEventListener("change", doNormal);
+id("normal-upper-infinite").addEventListener("change", doNormal);
+id("normal-upper-finite").addEventListener("change", doNormal);
+id("normal-approx-digits").addEventListener("keyup", doNormal);
+
+function doNormal() {
+    NMVars.a = id("normal-a").value;
+    NMVars.b = id("normal-b").value;
+    NMVars.m = id("normal-mean").value;
+    NMVars.s = id("normal-sd").value;
+    var valid = {a: false, b: false, m: false, s: false};
+    
+    var approxDigits = id("normal-approx-digits").value;
+
+    if (!isNumeric(approxDigits)) {
+        approxDigits = 2;
+    }
+    else {
+        approxDigits = Number(approxDigits);
+        if (approxDigits > 11) {
+            approxDigits = 11;
+            id("normal-approx-digits").value = "11";
+        }
+    }
+
+    if (isNumeric(NMVars.a)) {
+        valid.a = true;
+        NMVars.a = Number(NMVars.a);
+    }
+    if (isNumeric(NMVars.b)) {
+        valid.b = true;
+        NMVars.b = Number(NMVars.b);
+    }
+    if (isNumeric(NMVars.m)) {
+        valid.m = true;
+        NMVars.m = Number(NMVars.m);
+    }
+    if (isNumeric(NMVars.s)) {
+        valid.s = true;
+        NMVars.s = Number(NMVars.s);
+    }
+
+    if (id("normal-lower-infinite").checked && id("normal-upper-infinite").checked && isNumeric(NMVars.m) && isNumeric(NMVars.s)) {
+        id("normal-prob").innerHTML = "100%";
+    }
+    else {
+        if (id("normal-lower-infinite").checked || NMVars.a < -8.0 * NMVars.s) {
+            NMVars.a = -8.0 * NMVars.s;
+            valid.a = true;
+        }
+        if (NMVars.b < -8.0 * NMVars.s) NMVars.b = -8.0 * NMVars.s;
+        if (id("normal-upper-infinite").checked || NMVars.b > 8.0 * NMVars.s) {
+            NMVars.b = 8.0 * NMVars.s;
+            valid.b = true;
+        }
+        if (NMVars.a > 8.0 * NMVars.s) NMVars.a = 8.0 * NMVars.s;
+        
+        if (isNumeric(NMVars.a) && isNumeric(NMVars.b) && isNumeric(NMVars.m) && isNumeric(NMVars.s)) {
+            if (NMVars.a == NMVars.b) {
+                id("normal-prob").innerHTML = "0%"
+            }
+            else {
+                id("normal-prob").innerHTML = Number((integrate(n, NMVars.a, NMVars.b, Math.round((1000 * Math.abs(NMVars.b - NMVars.a)) / NMVars.s)) * 100).toFixed(approxDigits)) + "%";
+            }
+        }
+        else if (!(NMVars.a && NMVars.b && NMVars.m && NMVars.s)) {
+            id("normal-prob").innerHTML = "Not enough inputs";
+        }
+        else {
+            id("normal-prob").innerHTML = "All inputs must be numbers";
+        }
+    }
+}
+
 function SQGPSF(n) {
     // Return the square root of the greatest perfect sqaure factor of n
     for (var i = n - 1; i > 0; i--) {
@@ -525,3 +646,4 @@ doFOIL();
 doPointOps();
 doTrig();
 doCircle();
+doNormal();
