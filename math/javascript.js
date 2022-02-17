@@ -554,16 +554,16 @@ function doNormal() {
         id("normal-prob").innerHTML = "100%";
     }
     else {
-        if (id("normal-lower-infinite").checked || NMVars.a < -8.0 * NMVars.s) {
-            NMVars.a = -8.0 * NMVars.s;
+        if (id("normal-lower-infinite").checked || NMVars.a < -8.0 * NMVars.s + NMVars.m) {
+            NMVars.a = -8.0 * NMVars.s + NMVars.m;
             valid.a = true;
         }
-        if (NMVars.b < -8.0 * NMVars.s) NMVars.b = -8.0 * NMVars.s;
-        if (id("normal-upper-infinite").checked || NMVars.b > 8.0 * NMVars.s) {
-            NMVars.b = 8.0 * NMVars.s;
+        if (NMVars.b < -8.0 * NMVars.s + NMVars.m) NMVars.b = -8.0 * NMVars.s + NMVars.m;
+        if (id("normal-upper-infinite").checked || NMVars.b > 8.0 * NMVars.s + NMVars.m) {
+            NMVars.b = 8.0 * NMVars.s + NMVars.m;
             valid.b = true;
         }
-        if (NMVars.a > 8.0 * NMVars.s) NMVars.a = 8.0 * NMVars.s;
+        if (NMVars.a > 8.0 * NMVars.s + NMVars.m) NMVars.a = 8.0 * NMVars.s + NMVars.m;
         
         if (isNumeric(NMVars.a) && isNumeric(NMVars.b) && isNumeric(NMVars.m) && isNumeric(NMVars.s)) {
             if (NMVars.a == NMVars.b) {
