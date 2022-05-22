@@ -5,8 +5,46 @@
         <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
-        <div id="container" class="center">
-            <div id="board" class="flex column"></div>
+        <div id="centerer" class="flex center">
+            <div id="container" class="flex">
+                <div id="left-sidebar" class="flex column sidebar">
+                    <div class="padded">
+                        <p id="white-victory" class="hide">White wins!</p>
+                        <p id="black-victory" class="hide">Black wins!</p>
+                        <div id="promotion" class="flex column hide">
+                            <p class="white-promotion">White, choose a piece to promote to:</p>
+                            <p class="black-promotion">Black, choose a piece to promote to:</p>
+                            <div class="center">
+                                <div id="promotion-pieces" class="flex column">
+                                    <div id="promotion-row" class="flex row">
+                                        <div class="promotion-square pink">
+                                            <div id="white-queen-promotion" class="promotion-piece white-queen white-promotion"></div>
+                                            <div id="black-queen-promotion" class="promotion-piece black-queen black-promotion"></div>
+                                        </div>
+                                        <div class="promotion-square white">
+                                            <div id="white-knight-promotion" class="promotion-piece white-knight white-promotion"></div>
+                                            <div id="black-knight-promotion" class="promotion-piece black-knight black-promotion"></div>
+                                        </div>
+                                    </div>
+                                    <div id="promotion-row" class="flex row">
+                                        <div class="promotion-square white">
+                                            <div id="white-bishop-promotion" class="promotion-piece white-bishop white-promotion"></div>
+                                            <div id="black-bishop-promotion" class="promotion-piece black-bishop black-promotion"></div>
+                                        </div>
+                                        <div class="promotion-square blue">
+                                            <div id="white-rook-promotion" class="promotion-piece white-rook white-promotion"></div>
+                                            <div id="black-rook-promotion" class="promotion-piece black-rook black-promotion"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="board" class="flex column"></div>
+                <div id="right-sidebar" class="flex column sidebar">
+                </div>
+            </div>
         </div>
         <script src="javascript.js"></script>
     </body>

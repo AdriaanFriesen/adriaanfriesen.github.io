@@ -334,15 +334,15 @@ class Board {
         }
 
         else if (piece.piece == "king") {
-            // let moves = [];
+            let preMoves = [];
             let moveSpace = [[1, 1], [1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1], [0, 1]];
 
             for (let potentialMove of moveSpace) {
                 let potentialMoveCoords = addCoords(piece.coords, potentialMove);
 
                 if (7 >= potentialMoveCoords[0] && potentialMoveCoords[0] >= 0 && 7 >= potentialMoveCoords[1] && potentialMoveCoords[1] >= 0) {
-                    if (!this.getPiece(potentialMoveCoords)) moves.push(potentialMoveCoords);
-                    else if (this.getPiece(potentialMoveCoords).color != piece.color) moves.push(potentialMoveCoords);
+                    if (!this.getPiece(potentialMoveCoords)) preMoves.push(potentialMoveCoords);
+                    else if (this.getPiece(potentialMoveCoords).color != piece.color) preMoves.push(potentialMoveCoords);
                 }
             }
 
@@ -350,102 +350,99 @@ class Board {
             if (!piece.moved) {
                 // kingside
                 if (!this.getPiece([piece.coords[0] + 1, piece.coords[1]]) && !this.getPiece([piece.coords[0] + 2, piece.coords[1]]) && !this.getPiece([piece.coords[0] + 3, piece.coords[1]]).moved && this.getPiece([piece.coords[0] + 3, piece.coords[1]]).piece == "rook") {
-                    moves.push([piece.coords[0] + 2, piece.coords[1]]);
+                    preMoves.push([piece.coords[0] + 2, piece.coords[1]]);
                 }
 
                 // queenside
                 if (!this.getPiece([piece.coords[0] - 1, piece.coords[1]]) && !this.getPiece([piece.coords[0] - 2, piece.coords[1]]) && !this.getPiece([piece.coords[0] - 3, piece.coords[1]]) && !this.getPiece([piece.coords[0] - 4, piece.coords[1]]).moved && this.getPiece([piece.coords[0] - 4, piece.coords[1]]).piece == "rook") {
-                    moves.push([piece.coords[0] - 2, piece.coords[1]]);
+                    preMoves.push([piece.coords[0] - 2, piece.coords[1]]);
                 }
             }
 
-            // let selfMoves = [];
+            let selfMoves = [];
 
-            // for (let move of preMoves) {
-            //     let selfMove = this.copy()
-            //     selfMove.move(selfMove.getPiece(piece.coords), move, false, true);
-            //     selfMoves.push(selfMove);
-            // }
+            for (let move of preMoves) {
+                let selfMove = this.copy()
+                console.log("move 1");
+                selfMove.move(selfMove.getPiece(piece.coords), move, false, true);
+                selfMoves.push(selfMove);
+            }
 
-            // // console.log(selfMoves);
+            // console.log(selfMoves);
 
-            // let opponentMoves = [];
+            let opponentMoves = [];
 
-            // let invalidMoves = [];
-
-            // // generate tree
-            // for (let selfMove of selfMoves) {
-            //     if (selfMove.checkCheck(piece.color)) {
-            //         invalidMoves.push(selfMove.moveHistory[selfMove.moveHistory.length - 1][1]);
-            //     }
-            // }
-
-
-            // // // check for incurrance of check in possible moves
-            // // for (let opponentMove of opponentMoves) {
-            // //     let valid = false;
-            // //     for (let tPiece of opponentMove.pieceList) {
-            // //         if (tPiece.color == piece.color && tPiece.piece == "king") {
-            // //             valid = true;
-            // //         }
-            // //     }
-            // //     if (!valid) {
-            // //         invalidMoves.push(opponentMove.moveHistory[opponentMove.moveHistory.length - 2][1]);
-            // //     }
-            // // }
-
-            // // remove moves that would put king in check from possible moves
-            // for (let move of preMoves) {
-            //     let valid = true;
-            //     for (let invalidMove of invalidMoves) {
-            //         if (move[0] == invalidMove[0] && move[1] == invalidMove[1]) valid = false;
-            //     }
-            //     if (valid) moves.push(move);
-            // }
-
-        }   
-
-        // check for invalid moves
-        let movesFilter = [];
-        for (let move of moves) {
-            if (7 >= move[0] && move[0] >= 0 && 7 >= move[1] && move[1] >= 0) movesFilter.push(move);
-        }
-
-        moves = [];
-        
-        for (let move of movesFilter) {
-            moves.push(move);
-        }
-
-        if (doCheckCheck) {
             let invalidMoves = [];
 
-            // if (this.checkCheck(piece.color)) {
-            for (let move of moves) {
-                let moveBoard = this.copy();
-                moveBoard.move(moveBoard.getPiece(piece.coords), move, false, true);
-                if (moveBoard.checkCheck(piece.color)) invalidMoves.push(move);
+            // generate tree
+            for (let selfMove of selfMoves) {
+                if (selfMove.checkCheck(piece.color)) {
+                    invalidMoves.push(selfMove.moveHistory[selfMove.moveHistory.length - 1][1]);
+                }
             }
+
+
+            // // check for incurrance of check in possible moves
+            // for (let opponentMove of opponentMoves) {
+            //     let valid = false;
+            //     for (let tPiece of opponentMove.pieceList) {
+            //         if (tPiece.color == piece.color && tPiece.piece == "king") {
+            //             valid = true;
+            //         }
+            //     }
+            //     if (!valid) {
+            //         invalidMoves.push(opponentMove.moveHistory[opponentMove.moveHistory.length - 2][1]);
+            //     }
             // }
 
-            // console.log(moves);
-            // console.log(invalidMoves);
-
-            let movesFinal = []
-    
-            for (let move of moves) {
+            // remove moves that would put king in check from possible moves
+            for (let move of preMoves) {
                 let valid = true;
                 for (let invalidMove of invalidMoves) {
                     if (move[0] == invalidMove[0] && move[1] == invalidMove[1]) valid = false;
                 }
-                if (valid)  movesFinal.push(move);
+                if (valid) moves.push(move);
             }
 
-            return movesFinal;
+        }   
+
+        // check for invalid moves
+        // let movesFinal = [];
+        // for (let move of moves) {
+        //     if (7 >= move[0] && move[0] >= 0 && 7 >= move[1] && move[1] >= 0) movesFinal.push(move);
+        // }
+
+        let invalidMoves = [];
+
+        if (doCheckCheck) {
+            if (this.checkCheck(piece.color)) {
+                for (let i in moves) {
+                    let move = this.copy();
+                    console.log("move 2");
+                    move.move(piece, moves[i], false, true);
+                    if (move.checkCheck(piece.color)) {
+                        invalidMoves.push(moves[i]);
+                    }
+                }
+            }
+
+
+            // if (piece.piece != "king" && this.checkCheck(piece.color)) {
+            //     movesFinal = [];
+            // }
         }
-        else {
-            return moves;
+
+        let movesFinal = [];
+
+        for (let move of moves) {
+            let valid = true;
+            for (let invalidMove of invalidMoves) {
+                if (move[0] == invalidMove[0] && move[1] == invalidMove[1]) valid = false;
+            }
+            if (valid) movesFinal.push(move);
         }
+
+        return movesFinal;
     }
 
     checkCheck(color) {
@@ -455,8 +452,9 @@ class Board {
             if (opponentPiece.color != color && opponentPiece.piece != "king") {
                 for (let opponentMoveCoords of this.getMoves(opponentPiece, false)) {
                     let opponentMove = this.copy();
+                    console.log("move 3");
                     opponentMove.move(opponentMove.getPiece(opponentPiece.coords), opponentMoveCoords, false, true);
-                    // graph(opponentMove); 
+                    // graph(opponentMove);
                     opponentMoves.push(opponentMove);
                 }
             }
@@ -482,7 +480,10 @@ class Board {
     move(piece, coords, real, force) {
         this.moveHistory.push([[piece.coords[0], piece.coords[1]], [coords[0], coords[1]]]);
         if (force) {
-            if (real) $(coordsString(coords)).appendChild(piece.DOMObject);
+            if (real) {
+                $(coordsString(coords)).appendChild(piece.DOMObject);
+                console.log("real")
+            }
 
             // capturing
             if (this.getPiece(coords)) {
@@ -534,7 +535,8 @@ class Board {
                 castlePiece.coords = [piece.coords[0] - 1, piece.coords[1]];
             }
 
-            piece.coords = coords;
+            piece.coords[0] = coords[0];
+            piece.coords[1] = coords[1];
             
             // pawn promotion
             if (piece.piece == "pawn" && real) {
@@ -552,7 +554,10 @@ class Board {
         else {
             for (let move of this.getMoves(piece, true)) {
                 if (coords[0] == move[0] && coords[1] == move[1]) {
-                    if (real) $(coordsString(coords)).appendChild(piece.DOMObject);
+                    if (real) {
+                        $(coordsString(coords)).appendChild(piece.DOMObject);
+                        console.log("real")
+                    }
                     
                     // capturing
                     if (this.getPiece(coords)) {
@@ -598,7 +603,8 @@ class Board {
                         castlePiece.coords = [piece.coords[0] - 1, piece.coords[1]];
                     }
     
-                    piece.coords = coords;
+                    piece.coords[0] = coords[0];
+                    piece.coords[1] = coords[1];
                     
                     // pawn promotion
                     if (piece.piece == "pawn" && real) {
@@ -679,7 +685,9 @@ for (let y = 0; y <= 7; y++) {
             if (!board.promoting) {
                 if (event.target.classList.contains("piece")) {
                     let piece = board.getPiece(coordsList(event.target.parentElement.id));
+                    console.log(piece);
                     if (piece.color == board.turn) {
+                        console.log()
                         board.clearHighlight();
                         let moves = board.highlightMoves(piece);
                         board.moveSquares = [];
@@ -692,6 +700,7 @@ for (let y = 0; y <= 7; y++) {
                     else {
                         board.clearHighlight();
                         if (board.moveSquares.includes(event.target.parentElement)) {
+                            console.log("move 4");
                             board.move(board.movePiece, coordsList(event.target.parentElement.id), true, false);
                             board.moveSquares = [];
                             board.endTurn();
@@ -702,6 +711,12 @@ for (let y = 0; y <= 7; y++) {
                 else if (event.target.classList.contains("square")) {
                     board.clearHighlight();
                     if (board.moveSquares.includes(event.target) && board.moving) {
+                        console.log("move 5");
+                        console.log(board.movePiece);
+                        console.log(event.target.id);
+                        console.log(coordsList(event.target.id));
+                        console.log(event.target);
+                        console.log(board.moveSquares)
                         board.move(board.movePiece, coordsList(event.target.id), true, false);
                         board.moveSquares = [];
                         board.endTurn();

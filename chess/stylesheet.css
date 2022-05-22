@@ -1,8 +1,18 @@
+@font-face {
+    font-family: "Myriad Pro";
+    font-style: normal;
+    font-weight: 600;
+    src: local("Myriad Pro"), url("../resources/fonts/MYRIADPRO-SEMIBOLD.woff") format("woff");
+}
+
 body {
     background-color: #300e44;
     width: 100%;
     height: 100%;
     margin: 0;
+    font-family: "Myriad Pro", sans-serif;
+    font-size: 24px;
+    color: black;
 }
 
 html {
@@ -10,7 +20,17 @@ html {
     height: 100%;
 }
 
-#container {
+.padded {
+    padding: 5px;
+}
+
+/* #container {
+    flex-direction: row;
+    aspect-ratio: 5 / 4;
+    height: 80%;
+} */
+
+#centerer {
     width: 100%;
     height: 100%;
 }
@@ -21,29 +41,123 @@ html {
     align-items: center;
 }
 
+#container {
+    border: 5px solid #8f5924;
+}
+
+#board {
+    /* aspect-ratio: 1 / 1; */
+    width: 60%;
+    border-right: 5px solid #8f5924;
+    border-left: 5px solid #8f5924;
+}
+
+.board-row {
+    /* aspect-ratio: 8 / 1; */
+    height: 12.5%;
+    width: 100%;
+}
+
+.sidebar {
+    width: calc(20% - 5px);
+    background-color: #e8b37d;
+}
+
 @media only screen and (orientation: landscape) {
-    #board {
-        aspect-ratio: 1 / 1;
-        height: 80%;
+    #container {
+        flex-direction: row;
+        aspect-ratio: 5 / 3;
+        height: calc(80% + 10px);
     }
+    
+    /* #board {
+        width: 80%;
+    } */
+    
+    /* #left-sidebar {
+        flex-direction: row;
+        width: 10%;
+        height: 100%;
+    }
+
+    #right-sidebar {
+        flex-direction: row;
+        width: 10%;
+        height: 100%;
+    } */
 }
 
 @media only screen and (orientation: portrait) {
-    #board {
-        aspect-ratio: 1 / 1;
-        width: 80%;
+    #container {
+        flex-direction: row;
+        aspect-ratio: 5 / 3;
+        width: 100%;
     }
+
+    /* #board {
+        width: 80%;
+    } */
+    
+    /* #left-sidebar {
+        flex-direction: column;
+        height: 10%;
+        width: 100%;
+    }
+
+    #right-sidebar {
+        flex-direction: column;
+        height: 10%;
+        width: 100%;
+    } */
 }
 
 .square {
     width: 12.5%;
     height: 100%;
-    background-blend-mode: color;
+}
+
+#promotion-pieces {
+    aspect-ratio: 1 / 1;
+    width: calc(calc(100% / 3) * 2);
+    border: 5px solid #8f5924;
+}
+
+#promotion-row {
+    flex: 1;
+    width: 100%
+}
+
+.promotion-square {
+    flex: 1;
+}
+
+.promotion-piece {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
 }
 
 .piece {
     width: 100%;
     height: 100%;
+    background-size: cover;
+}
+
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+    /* height: 12.5%; */
+}
+
+.hide {
+    display: none;
 }
 
 /* .pink {
@@ -71,44 +185,27 @@ html {
 } */
 
 .pink {
-    background-color: #222222;
+    background-color: #d18b47;
 }
 
 .blue {
-    background-color: #222222;
+    background-color: #d18b47;
 }
 
 .white {
-    background-color: #e0e0e0;
+    background-color: #ffce9e;
 }
 
 .highlight-pink {
-    background-color: #7E4918;
+    background-color: #B9B78E;
 }
 
 .highlight-blue {
-    background-color: #7E4918;
+    background-color: #B9B78E;
 }
 
 .highlight-white {
-    background-color: #DDA877;
-}
-
-.flex {
-    display: flex;
-}
-
-.column {
-    flex-direction: column;
-}
-
-.row {
-    flex-direction: row;
-    height: 12.5%;
-}
-
-.piece {
-    background-size: cover;
+    background-color: #D4DFC2;
 }
 
 .black-rook {
