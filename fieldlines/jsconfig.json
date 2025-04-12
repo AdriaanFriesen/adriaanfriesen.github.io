@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6"
+  },
+  "include": [
+    "*.js",
+    "**/*.js",
+    "/home/emily/Downloads/Microsoft.VisualStudio.Services/extension/p5types/global.d.ts"
+  ]
+}
