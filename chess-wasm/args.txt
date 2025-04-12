@@ -1,9 +1,0 @@
-emcc
-engine.c
--o engine.js
---js-library library.js
--s NO_EXIT_RUNTIME=1
--s EXPORTED_FUNCTIONS=_main
--s EXPORTED_RUNTIME_METHODS=cwrap
--s ALLOW_MEMORY_GROWTH
---post-js ./cwrap.js

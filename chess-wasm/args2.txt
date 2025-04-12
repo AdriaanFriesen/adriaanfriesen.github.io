@@ -1,3 +1,0 @@
-gcc
-engine.c
--o engine.exe
